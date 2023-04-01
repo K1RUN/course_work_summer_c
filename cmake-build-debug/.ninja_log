@@ -1,0 +1,12 @@
+# ninja log v5
+36	55	1680272047545366923	my	eafcb1f741f4ba85
+0	30	1680272415363319098	CMakeFiles/my.dir/Testing/log.c.o	8c8389cac4a7cda8
+0	21	1680270956449644010	CMakeFiles/my.dir/logging/log.c.o	e7f58eea16be4209
+0	24	1680272521922465995	build.ninja	aa0f6de39f406a0c
+0	18	1680272168707668861	CMakeFiles/my.dir/main.c.o	6bbcc8019e3fd5d5
+1	15	1680270327844886712	CMakeFiles/my.dir/helpmenu.c.o	d372217cd63f1019
+0	18	1680272563178910027	CMakeFiles/my.dir/main.c.o	6bbcc8019e3fd5d5
+0	15	1680272588112178376	CMakeFiles/my.dir/Testing/error_handler.c.o	31447136c05663fb
+0	28	1680272717466570611	CMakeFiles/my.dir/Testing/error_handler.c.o	31447136c05663fb
+0	30	1680272717468570633	CMakeFiles/my.dir/main.c.o	6bbcc8019e3fd5d5
+30	45	1680272717482570783	my	d84786009ecfbe7d
