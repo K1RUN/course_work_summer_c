@@ -5,11 +5,11 @@
 
 void process_error(int error_id){
     switch(error_id){
-        case FOPEN: {
+        case FOPEN_ERR: {
             log_fatal("Cannot open the file");
             break;
         }
-        case FWRITE: {
+        case FWRITE_ERR: {
             log_fatal("Cannot write to a file");
             break;
         }
