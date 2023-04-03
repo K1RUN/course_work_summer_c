@@ -1,18 +1,14 @@
 #include "helpmenu.h"
 #include "BMP_parser/bmp_parser.h"
 #include "BMP_parser/bmp_structs.h"
-#include "Testing/error_handler.h"
+#include "Error_handling/error_handler.h"
 #include <stdio.h>
-#include <stdbool.h>
 #include <getopt.h>
 #include <stdlib.h>
-
-void set_pixel(Rgb** matrix, Pixel point, Rgb color){
-
-}
+#include "Geometry/line_draw.h"
 
 int main (int argc, char *argv[]) {
-    char *filename = "sample.bmp";
+    char *filename = "simpsonsvr.bmp";
     char *mode = "rb";
     if(argc == 1) {
         print_help();
@@ -27,15 +23,16 @@ int main (int argc, char *argv[]) {
     print_dib_header(dibh);
     Pixels image;
     image.h = dibh.image_height;
+    // width of every scanset including trash
     image.w = dibh.image_width;
     unsigned short offset = image.w * sizeof(Rgb) % 4;
     offset = offset ? 4 - offset : 0;
-    // width of every scanset including trash
     image.matrix = malloc(image.h * sizeof(Rgb*));
     fseek(fp, bmfh.offset_to_pixels, SEEK_SET);
-    for(unsigned int i = 0; i < image.h; i++){
-        image.matrix[i] = calloc(image.w*sizeof(Rgb), 1);
-        if (fread(image.matrix[i], 1, image.w*sizeof(Rgb), fp) != image.w*sizeof(Rgb)) {
+    for(unsigned int i = image.h; i != 0; --i){
+        // scansets come in reverse order by default, so reading it inverse
+        image.matrix[i - 1] = calloc(image.w*sizeof(Rgb), 1);
+        if (fread(image.matrix[i - 1], 1, image.w*sizeof(Rgb), fp) != image.w*sizeof(Rgb)) {
             process_error(FREAD_ERR); break;
         }
     }
@@ -44,8 +41,13 @@ int main (int argc, char *argv[]) {
     fwrite(&dibh, 1, sizeof(DIB_Header), fout);
     fseek(fout, bmfh.offset_to_pixels, SEEK_SET);
     char* garbage = calloc(offset * sizeof(Rgb), 1);
-    for(unsigned int i = 0; i < image.h; i++){
-        fwrite(image.matrix[i], 1, image.w * sizeof(Rgb), fout);
+    Pixel point1 = {0, 0, {255, 0, 0}};
+    Pixel point2 = {300, 700, {255, 0, 0}};
+    //set_pixel(image, point1);
+    drawLine(image, point1, point2); // ??? draws only vertical lines
+    for(unsigned int i = image.h; i > 0; i--){
+        // writing scansets in reverse order
+        fwrite(image.matrix[i - 1], 1, image.w * sizeof(Rgb), fout);
         fwrite(garbage, 1, offset, fout);
     }
     printf("%ld\n", sizeof(DIB_Header));

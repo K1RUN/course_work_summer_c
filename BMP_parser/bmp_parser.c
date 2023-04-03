@@ -1,7 +1,4 @@
 #include "bmp_parser.h"
-#include <stdbool.h>
-#include "../Testing/error_handler.h"
-#include <stdio.h>
 
 void print_file_header(Bitmap_File_Header bitmap) {
     printf("signature: %x (%hu)\n", bitmap.signature, bitmap.signature);
@@ -27,7 +24,7 @@ void print_dib_header(DIB_Header bitmap) {
 
 bool open_bmp(char* filename, char* mode) {
     FILE* fp = fopen(filename, mode);
-    if(fp == NULL){
+    if(fp == NULL) {
         process_error(FOPEN_ERR);
         return false;
     }

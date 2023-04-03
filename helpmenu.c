@@ -1,5 +1,5 @@
 #include "helpmenu.h"
-#include <stdio.h>
+
 
 const char* helpmenu = "bmpp        commandline BMP processor [version 0.0]\n"
                                  "\n"
