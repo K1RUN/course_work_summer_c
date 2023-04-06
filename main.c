@@ -6,6 +6,7 @@
 #include <getopt.h>
 #include <stdlib.h>
 #include "Geometry/line_draw.h"
+#include "fixed.h"
 
 int main (int argc, char *argv[]) {
     char *filename = "simpsonsvr.bmp";
@@ -35,21 +36,23 @@ int main (int argc, char *argv[]) {
         if (fread(image.matrix[i - 1], 1, image.w*sizeof(Rgb), fp) != image.w*sizeof(Rgb)) {
             process_error(FREAD_ERR); break;
         }
+        fseek(fp, offset, SEEK_CUR);
     }
     FILE* fout = fopen("result.bmp", "wb");
     fwrite(&bmfh, 1, sizeof(Bitmap_File_Header), fout);
     fwrite(&dibh, 1, sizeof(DIB_Header), fout);
     fseek(fout, bmfh.offset_to_pixels, SEEK_SET);
-    char* garbage = calloc(offset * sizeof(Rgb), 1);
-    Pixel point1 = {0, 0, {255, 0, 0}};
-    Pixel point2 = {300, 700, {255, 0, 0}};
-    //set_pixel(image, point1);
-    drawLine(image, point1, point2); // ??? draws only vertical lines
+    char* garbage = calloc(offset, 1);
+    Pixel point1 = {420, 10, {0, 255, 255}};
+    Pixel point2 = {5, 560, {0, 255, 255}};
+    Pixel point3 = {780, 450, {0, 255, 255}};
+    draw_triangle(image, point1, point2, point3);
     for(unsigned int i = image.h; i > 0; i--){
         // writing scansets in reverse order
         fwrite(image.matrix[i - 1], 1, image.w * sizeof(Rgb), fout);
         fwrite(garbage, 1, offset, fout);
     }
+    printf("%ld\n", sizeof(Bitmap_File_Header));
     printf("%ld\n", sizeof(DIB_Header));
     fclose(fp);
     fclose(fout);

@@ -10,8 +10,8 @@ typedef struct {
 } Pixels;
 
 typedef struct {
-    unsigned int x;
-    unsigned int y;
+    int x;
+    int y;
     Rgb color;
 } Pixel;
 #endif //MY_BMP_STRUCTS_H
