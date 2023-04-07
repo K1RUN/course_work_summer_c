@@ -9,7 +9,7 @@
 #include "fixed.h"
 
 int main (int argc, char *argv[]) {
-    char *filename = "simpsonsvr.bmp";
+    char *filename = "t2.bmp";
     char *mode = "rb";
     if(argc == 1) {
         print_help();
@@ -43,9 +43,9 @@ int main (int argc, char *argv[]) {
     fwrite(&dibh, 1, sizeof(DIB_Header), fout);
     fseek(fout, bmfh.offset_to_pixels, SEEK_SET);
     char* garbage = calloc(offset, 1);
-    Pixel point1 = {420, 10, {0, 255, 255}};
-    Pixel point2 = {5, 560, {0, 255, 255}};
-    Pixel point3 = {780, 450, {0, 255, 255}};
+    Pixel point1 = {30, 90, {0, 255, 255}};
+    Pixel point2 = {130, 50, {0, 255, 255}};
+    Pixel point3 = {120, 80, {0, 255, 255}};
     draw_triangle(image, point1, point2, point3);
     for(unsigned int i = image.h; i > 0; i--){
         // writing scansets in reverse order

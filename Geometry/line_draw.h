@@ -18,4 +18,6 @@
 void Bresenham(Pixels img, Pixel point1, Pixel point2);
 void DDA(Pixel point1, Pixel point2, Pixel** arr);
 void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3);
+Pixel get_inner_vertex(Pixel point1, Pixel point2, unsigned offset);
+Rectangle Boundary(Pixel point1, Pixel point2, Pixel point3);
 #endif //MY_LINE_DRAW_H

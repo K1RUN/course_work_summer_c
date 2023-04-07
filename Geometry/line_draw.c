@@ -26,29 +26,43 @@ void Bresenham(Pixels img, Pixel point1, Pixel point2) {
     }
 }
 
-void Homothety(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, unsigned thickness) {
-    // arr for storing pixels that connect center of homethety and vertices
-    Pixel center = {(vertex1.x + vertex2.x + vertex3.x)/3, (vertex1.y + vertex2.y + vertex3.y)/3, {0, 0, 255}};
-    Pixel *arr1 = (Pixel*)malloc(sizeof(Pixel) * BUF);
-    Pixel *arr2 = (Pixel*)malloc(sizeof(Pixel) * BUF);
-    Pixel *arr3 = (Pixel*)malloc(sizeof(Pixel) * BUF);
-    DDA(vertex1, center, &arr1);
-    Bresenham(img, vertex1, center);
-    DDA(vertex2, center, &arr2);
-    Bresenham(img, vertex2, center);
-    DDA(vertex3, center, &arr3);
-    Bresenham(img, vertex3, center);
-    for(int i = 0; i < thickness; i++) {
-        Pixel p1 = arr1[i];
-        Pixel p2 = arr2[i];
-        Pixel p3 = arr3[i];
-        Bresenham(img, arr1[i], arr2[i]);
-        Bresenham(img, arr2[i], arr3[i]);
-        Bresenham(img, arr1[i], arr3[i]);
+bool is_in_triangle(Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel point) {
+    // checking if vectors containing our vertices are under right hand rule
+    int base_vect_mul = (vertex2.x - vertex1.x) * (vertex3.y - vertex1.y) -
+                        (vertex2.y - vertex1.y) * (vertex3.x - vertex1.x);
+    int k = base_vect_mul < 0 ? 1 : -1;
+    // using vector multiplication properties https://erkaman.github.io/posts/fast_triangle_rasterization.html
+    int vect_mul1 = k * ((vertex2.y - vertex1.y) * (point.x - vertex1.x) - (vertex2.x - vertex1.x) * (point.y - vertex1.y));
+    int vect_mul2 = k * ((vertex3.x - vertex1.x) * (point.y - vertex1.y) - (vertex3.y - vertex1.y) * (point.x - vertex1.x));
+    int vect_mul3 = k * ((vertex3.y - vertex2.y) * (point.x - vertex2.x) - (vertex3.x - vertex2.x) * (point.y - vertex2.y));
+    if(vect_mul1 > 0 && vect_mul2 > 0 && vect_mul3 > 0) {
+        return true;
+    } else {
+        return false;
     }
 }
 
-void DDA(Pixel point1, Pixel point2, Pixel** arr) {
+
+void Homothety(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, unsigned thickness) {
+    // arr for storing pixels that connect center of homethety and vertices
+    Pixel center = {(vertex1.x + vertex2.x + vertex3.x)/3, (vertex1.y + vertex2.y + vertex3.y)/3, {0, 0, 255}};
+    Pixel inner_vert1 = get_inner_vertex(vertex1, center, thickness);
+    Pixel inner_vert2 = get_inner_vertex(vertex2, center, thickness);
+    Pixel inner_vert3 = get_inner_vertex(vertex3, center, thickness);
+    Rectangle rect = Boundary(vertex1, vertex3, vertex2);
+    Pixel p = vertex3;
+    for(int i = rect.v1.y; i <= rect.v2.y; i++) {
+        for(int j = rect.v1.x; j <= rect.v2.x; j++) {
+            p.x = j; p.y = i;
+            if(is_in_triangle(vertex1, vertex2, vertex3, p) == true &&
+            is_in_triangle(inner_vert1, inner_vert2, inner_vert3, p) == false) {
+                set_pixel(img, p);
+            }
+        }
+    }
+}
+
+Pixel get_inner_vertex(Pixel point1, Pixel point2, unsigned offset) {
     int x1 = (int)point1.x;
     int x2 = (int)point2.x;
     int y1 = (int)point1.y;
@@ -58,23 +72,13 @@ void DDA(Pixel point1, Pixel point2, Pixel** arr) {
     const int signX = x1 < x2 ? 1 : -1;
     const int signY = y1 < y2 ? 1 : -1;
     int error = deltaX - deltaY;
-    int arr_len = BUF;
-    int i = 0;
+    int count = 0;
     while(x1 != x2 || y1 != y2) {
-        point1.x = x1; point1.y = y1;
-        if(arr_len == i) {
-            Pixel* tmp = (Pixel*)realloc(*arr, (arr_len + BUF) * sizeof(Pixel));
-            if(tmp == NULL) {
-                free(*arr);
-                log_fatal("Error while reallocating memory");
-                return;
-            } else {
-                *arr = tmp;
-                arr_len += BUF;
-            }
+        if(count == offset) {
+            return point1;
         }
-        (*arr)[i++] = point1;
-        int error2 = error;
+        point1.x = x1; point1.y = y1;
+        int error2 = error * 2;
         if(error2 > -deltaY) {
             error -= deltaY;
             x1 += signX;
@@ -83,7 +87,9 @@ void DDA(Pixel point1, Pixel point2, Pixel** arr) {
             error += deltaX;
             y1 += signY;
         }
+        count++;
     }
+    return point1;
 }
 
 Rectangle Boundary(Pixel point1, Pixel point2, Pixel point3) {
@@ -102,36 +108,30 @@ Rectangle Boundary(Pixel point1, Pixel point2, Pixel point3) {
     return rect;
 }
 
-void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3) {
+void fill_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel p) {
     Rectangle rect = Boundary(vertex1, vertex3, vertex2);
-    Pixel p = {0, 0, {255, 255, 255}};
-    for(int i = rect.v1.y; i <= rect.v2.y; i++) {
-        for(int j = rect.v1.x; j <= rect.v2.x; j++) {
-            // checking if vectors containing our vertices are under right hand rule
-            int base_vect_mul = (vertex2.x - vertex1.x) * (vertex3.y - vertex1.y) -
-                                (vertex2.y - vertex1.y) * (vertex3.x - vertex1.x);
-            int k = base_vect_mul < 0 ? 1 : -1;
-            p.x = j; p.y = i;
-            // using vector multiplication properties https://erkaman.github.io/posts/fast_triangle_rasterization.html
-            int vect_mul1 = k * ((vertex2.y - vertex1.y) * (p.x - vertex1.x) - (vertex2.x - vertex1.x) * (p.y - vertex1.y));
-            int vect_mul2 = k * ((vertex3.x - vertex1.x) * (p.y - vertex1.y) - (vertex3.y - vertex1.y) * (p.x - vertex1.x));
-            int vect_mul3 = k * ((vertex3.y - vertex2.y) * (p.x - vertex2.x) - (vertex3.x - vertex2.x) * (p.y - vertex2.y));
-            if(vect_mul1 > 0 && vect_mul2 > 0 && vect_mul3 > 0) {
-                    set_pixel(img, p);
-                    // TODO
+    for (int i = rect.v1.y; i <= rect.v2.y; i++) {
+        for (int j = rect.v1.x; j <= rect.v2.x; j++) {
+            p.x = j;
+            p.y = i;
+            if (is_in_triangle(vertex1, vertex2, vertex3, p) == true) {
+                set_pixel(img, p);
             }
         }
     }
+}
+
+void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3) {
+    Pixel p = {0, 0, 255, 255, 255};
+    fill_triangle(img, vertex1, vertex2, vertex3, p);
     Bresenham(img, vertex1, vertex2);
     Bresenham(img, vertex2, vertex3);
     Bresenham(img, vertex1, vertex3);
-    vertex1.color.g = 0; vertex1.color.r = 255; vertex1.color.b = 0;
-    vertex2.color.g = 255; vertex2.color.r = 0; vertex2.color.b = 0;
-    vertex3.color.g = 0; vertex3.color.r = 0; vertex3.color.b = 255;
     set_pixel(img, vertex1);
     set_pixel(img, vertex2);
     set_pixel(img, vertex3);
-    Pixel center = {(vertex1.x + vertex2.x + vertex3.x)/3, (vertex1.y + vertex2.y + vertex3.y)/3, {0, 0, 255}};
-    set_pixel(img, center);
-    Homothety(img, vertex1, vertex2, vertex3, 30);
+    Homothety(img, vertex1, vertex2, vertex3, 20);
+//    Bresenham(img, center, vertex3);
+//    Bresenham(img, center, vertex2);
+//    Bresenham(img, center, vertex1);
 }
