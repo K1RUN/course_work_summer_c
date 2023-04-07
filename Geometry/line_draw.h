@@ -1,5 +1,6 @@
 #ifndef MY_LINE_DRAW_H
 #define MY_LINE_DRAW_H
+#define BUF 10
 #define min(a,b) \
    ({ __typeof__ (a) _a = (a); \
        __typeof__ (b) _b = (b); \
@@ -15,6 +16,6 @@
 #include "../BMP_parser/bmp_structs.h"
 
 void Bresenham(Pixels img, Pixel point1, Pixel point2);
-void DDA(Pixels img, Pixel point1, Pixel point2);
+void DDA(Pixel point1, Pixel point2, Pixel** arr);
 void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3);
 #endif //MY_LINE_DRAW_H

@@ -26,29 +26,67 @@ void Bresenham(Pixels img, Pixel point1, Pixel point2) {
     }
 }
 
-void DDA(Pixels img, Pixel point1, Pixel point2) {
-    int dx = (int)(point2.x - point1.x);
-    int dy = (int)(point2.y - point1.y);
-    int step;
-    if(abs(dx) > abs(dy)) {
-        step = abs(dx);
-    } else {
-        step = abs(dy);
-    }
-    double Xi = (double)dx / (double)step;
-    double Yi = (double)dy / (double)step;
-    double X_round = 0;
-    double Y_round = 0;
-    for(int i = 1; i <= step; i++) {
-        set_pixel(img, point1);
-        X_round += Xi;
-        Y_round += Yi;
-        point1.x = (int)(X_round < 0 ? (X_round - 0.5) : (X_round + 0.5));
-        point1.y = (int)(Y_round < 0 ? (Y_round - 0.5) : (Y_round + 0.5));
+void Homothety(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, unsigned thickness) {
+    // arr for storing pixels that connect center of homethety and vertices
+    Pixel center = {(vertex1.x + vertex2.x + vertex3.x)/3, (vertex1.y + vertex2.y + vertex3.y)/3, {0, 0, 255}};
+    Pixel *arr1 = (Pixel*)malloc(sizeof(Pixel) * BUF);
+    Pixel *arr2 = (Pixel*)malloc(sizeof(Pixel) * BUF);
+    Pixel *arr3 = (Pixel*)malloc(sizeof(Pixel) * BUF);
+    DDA(vertex1, center, &arr1);
+    Bresenham(img, vertex1, center);
+    DDA(vertex2, center, &arr2);
+    Bresenham(img, vertex2, center);
+    DDA(vertex3, center, &arr3);
+    Bresenham(img, vertex3, center);
+    for(int i = 0; i < thickness; i++) {
+        Pixel p1 = arr1[i];
+        Pixel p2 = arr2[i];
+        Pixel p3 = arr3[i];
+        Bresenham(img, arr1[i], arr2[i]);
+        Bresenham(img, arr2[i], arr3[i]);
+        Bresenham(img, arr1[i], arr3[i]);
     }
 }
 
-Rectangle Boundary(Pixels img, Pixel point1, Pixel point2, Pixel point3) {
+void DDA(Pixel point1, Pixel point2, Pixel** arr) {
+    int x1 = (int)point1.x;
+    int x2 = (int)point2.x;
+    int y1 = (int)point1.y;
+    int y2 = (int)point2.y;
+    const int deltaX = abs(x2 - x1);
+    const int deltaY = abs(y2 - y1);
+    const int signX = x1 < x2 ? 1 : -1;
+    const int signY = y1 < y2 ? 1 : -1;
+    int error = deltaX - deltaY;
+    int arr_len = BUF;
+    int i = 0;
+    while(x1 != x2 || y1 != y2) {
+        point1.x = x1; point1.y = y1;
+        if(arr_len == i) {
+            Pixel* tmp = (Pixel*)realloc(*arr, (arr_len + BUF) * sizeof(Pixel));
+            if(tmp == NULL) {
+                free(*arr);
+                log_fatal("Error while reallocating memory");
+                return;
+            } else {
+                *arr = tmp;
+                arr_len += BUF;
+            }
+        }
+        (*arr)[i++] = point1;
+        int error2 = error;
+        if(error2 > -deltaY) {
+            error -= deltaY;
+            x1 += signX;
+        }
+        if(error2 < deltaX) {
+            error += deltaX;
+            y1 += signY;
+        }
+    }
+}
+
+Rectangle Boundary(Pixel point1, Pixel point2, Pixel point3) {
     // coordinates for left upper vertex of the rectangle
     int x1 = min(point1.x, point2.x);
     x1 = min(x1, point3.x);
@@ -65,7 +103,7 @@ Rectangle Boundary(Pixels img, Pixel point1, Pixel point2, Pixel point3) {
 }
 
 void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3) {
-    Rectangle rect = Boundary(img, vertex1, vertex3, vertex2);
+    Rectangle rect = Boundary(vertex1, vertex3, vertex2);
     Pixel p = {0, 0, {255, 255, 255}};
     for(int i = rect.v1.y; i <= rect.v2.y; i++) {
         for(int j = rect.v1.x; j <= rect.v2.x; j++) {
@@ -93,6 +131,7 @@ void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3) {
     set_pixel(img, vertex1);
     set_pixel(img, vertex2);
     set_pixel(img, vertex3);
-//    Pixel center = {(vertex1.x + vertex2.x + vertex3.x)/3, (vertex1.y + vertex2.y + vertex3.y)/3, {0, 0, 255}};
-//    set_pixel(img, center);
+    Pixel center = {(vertex1.x + vertex2.x + vertex3.x)/3, (vertex1.y + vertex2.y + vertex3.y)/3, {0, 0, 255}};
+    set_pixel(img, center);
+    Homothety(img, vertex1, vertex2, vertex3, 30);
 }
