@@ -18,6 +18,10 @@ typedef struct {
     Pixel v1;
     Pixel v2;
 } Rectangle;
+
+typedef struct {
+    int x; int y;
+} Vector;
 bool in_area(Pixel point, size_t height, size_t width);
 void set_pixel(Pixels img, Pixel point);
 #endif //MY_GENERAL_H

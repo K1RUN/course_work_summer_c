@@ -26,3 +26,18 @@ void Bresenham(Pixels img, Pixel point1, Pixel point2) {
     }
 }
 
+Pixel line_intercept(Vector direct1, Pixel point1, Vector direct2, Pixel point2) {
+    // basically just transformed line intercept equation
+    float d1y = (float)direct1.y; float d1x = (float)direct1.x;
+    float d2y = (float)direct2.y; float d2x = (float)direct2.x;
+    float y1 = (float)point1.y; float x1 = (float)point1.x;
+    float y2 = (float)point2.y; float x2 = (float)point2.x;
+    float k = (float)(d2y - (d1y * d2x)/d1x);
+    float is_eq = (float)((-x1 * d1y * d2x)/d1x + (y1 - y2) * d2x + x2 * d2y);
+    float x = is_eq/k;
+    float y = (x - x1) * d1y/d1x + y1;
+    Pixel intercept;
+    intercept.x = (int)(x < 0 ? (x - 0.5) : (x + 0.5));
+    intercept.y = (int)(y < 0 ? (y - 0.5) : (y + 0.5));
+    return intercept;
+}

@@ -63,7 +63,6 @@ Pixel get_projection(Pixel p, Pixel vertex1, Pixel vertex2) {
         float is_eq = (float) (v1x * dvy / dvx - p.x * ny / nx - v1y + p.y);
         float x = is_eq / k;
         float y = dvy * (x - v1x) / dvx + v1y;
-
         center.x = (int) (x < 0 ? (x - 0.5) : (x + 0.5));
         center.y = (int) (y < 0 ? (y - 0.5) : (y + 0.5));
         return center;
@@ -73,11 +72,11 @@ Pixel get_projection(Pixel p, Pixel vertex1, Pixel vertex2) {
 Pixel incenter(Pixel vertex1, Pixel vertex2, Pixel vertex3) {
     Pixel center;
     center.color.r = 255; center.color.g = 0; center.color.b = 0;
-    int x1 = vertex1.x; int y1 = vertex1.y;
-    int x2 = vertex2.x; int y2 = vertex2.y;
-    int x3 = vertex3.x; int y3 = vertex3.y;
-    int x12 = x1 - x2; int x23 = x2 - x3; int x31 = x3 - x1;
-    int y12 = y1 - y2; int y23 = y2 - y3; int y31 = y3 - y1;
+    float x1 = (float)vertex1.x; float y1 = (float)vertex1.y;
+    float x2 = (float)vertex2.x; float y2 = (float)vertex2.y;
+    float x3 = (float)vertex3.x; float y3 = (float)vertex3.y;
+    float x12 = x1 - x2; float x23 = x2 - x3; float x31 = x3 - x1;
+    float y12 = y1 - y2; float y23 = y2 - y3; float y31 = y3 - y1;
     float l12 = (float)(sqrt(x12 * x12 + y12 * y12));
     float l23 = (float)(sqrt(x23 * x23 + y23 * y23));
     float l31 = (float)(sqrt(x31 * x31 + y31 * y31));
@@ -89,11 +88,29 @@ Pixel incenter(Pixel vertex1, Pixel vertex2, Pixel vertex3) {
     return center;
 }
 
-void Homothety(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel center, unsigned thickness) {
-    // arr for storing pixels that connect center of homothety and vertices
-    Pixel inner_vert1 = get_inner_vertex(vertex1, center, thickness);
-    Pixel inner_vert2 = get_inner_vertex(vertex2, center, thickness);
-    Pixel inner_vert3 = get_inner_vertex(vertex3, center, thickness);
+void draw_width(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel center, unsigned thickness) {
+    Pixel proj1 = get_projection(center, vertex1, vertex2);
+    Pixel proj2 = get_projection(center, vertex2, vertex3);
+    Pixel proj3 = get_projection(center, vertex1, vertex3);
+    Pixel inner_offset1 = get_inner_vertex(proj1, center, 20);
+    Pixel inner_offset2 = get_inner_vertex(proj2, center, 20);
+    Pixel inner_offset3 = get_inner_vertex(proj3, center, 20);
+    inner_offset3.color.r = 0; inner_offset3.color.g = 255, inner_offset3.color.b = 0;
+    Vector normal1 = {center.x - proj1.x, center.y - proj1.y};
+    Vector normal2 = {center.x - proj2.x, center.y - proj2.y};
+    Vector normal3 = {center.x - proj3.x, center.y - proj3.y};
+    Vector direct1 = {-normal1.y, normal1.x};
+    Vector direct2 = {-normal2.y, normal2.x};
+    Vector direct3 = {-normal3.y, normal3.x};
+    Pixel inner_vert1 = line_intercept(direct1, inner_offset1, direct2, inner_offset2);
+    Pixel inner_vert2 = line_intercept(direct1, inner_offset1, direct3, inner_offset3);
+    Pixel inner_vert3 = line_intercept(direct2, inner_offset2, direct3, inner_offset3);
+    inner_vert1.color.g = 180;
+    inner_vert2.color.g = 180;
+    inner_vert3.color.g = 180;
+    set_pixel(img, inner_vert1);
+    set_pixel(img, inner_vert2);
+    set_pixel(img, inner_vert3);
     Rectangle rect = Boundary(vertex1, vertex3, vertex2);
     Pixel p = vertex3;
     for(int i = rect.v1.y; i <= rect.v2.y; i++) {
@@ -120,10 +137,10 @@ Pixel get_inner_vertex(Pixel point1, Pixel point2, unsigned offset) {
     int error = deltaX - deltaY;
     int count = 0;
     while(x1 != x2 || y1 != y2) {
+        point1.x = x1; point1.y = y1;
         if(count == offset) {
             return point1;
         }
-        point1.x = x1; point1.y = y1;
         int error2 = error * 2;
         if(error2 > -deltaY) {
             error -= deltaY;
@@ -167,33 +184,54 @@ void fill_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixe
     }
 }
 
-void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3) {
-    Pixel p = {0, 0, 255, 255, 255};
-    fill_triangle(img, vertex1, vertex2, vertex3, p);
+void draw_outer_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3) {
     Bresenham(img, vertex1, vertex2);
     Bresenham(img, vertex2, vertex3);
     Bresenham(img, vertex1, vertex3);
+}
+
+void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3) {
+    Pixel p = {0, 0, 255, 255, 255};
+    fill_triangle(img, vertex1, vertex2, vertex3, p);
+    draw_outer_triangle(img, vertex1, vertex2, vertex3);
     vertex1.color.r = 255; vertex1.color.g = 0; vertex1.color.b = 0;
     vertex2.color.r = 0; vertex2.color.g = 255; vertex2.color.b = 0;
     vertex3.color.r = 0; vertex3.color.g = 0; vertex3.color.b = 255;
     set_pixel(img, vertex1);
     set_pixel(img, vertex2);
     set_pixel(img, vertex3);
-//    Pixel center = circumscribed_circle_cent(vertex1, vertex2, vertex3);
-//    set_pixel(img, center);
-    Pixel center = center_of_mass(vertex1, vertex2, vertex3);
-    set_pixel(img, center);
+    Pixel center = incenter(vertex3, vertex2, vertex1);
 //    Pixel proj1 = get_projection(center, vertex1, vertex2);
 //    set_pixel(img, proj1);
 //    Pixel proj2 = get_projection(center, vertex2, vertex3);
 //    set_pixel(img, proj2);
 //    Pixel proj3 = get_projection(center, vertex1, vertex3);
 //    set_pixel(img, proj3);
-    Homothety(img, vertex1, vertex2, vertex3, center, 20);
+//    Homothety(img, vertex1, vertex2, vertex3, center, 20);
 //    set_pixel(img, center);
 //    Homothety(img, proj1, proj2, proj3, center, 10);
-    Bresenham(img, center, vertex1);
-    Bresenham(img, center, vertex2);
-    Bresenham(img, center, vertex3);
-
+//    Bresenham(img, proj1, center);
+//    Bresenham(img, proj2, center);
+//    Bresenham(img, proj3, center);
+//    Pixel inner_offset1 = get_inner_vertex(proj1, center, 100);
+//    Pixel inner_offset2 = get_inner_vertex(proj2, center, 100);
+//    Pixel inner_offset3 = get_inner_vertex(proj3, center, 100);
+//    inner_offset3.color.r = 0; inner_offset3.color.g = 255, inner_offset3.color.b = 0;
+//    set_pixel(img, inner_offset3);
+//    Vector normal1 = {center.x - proj1.x, center.y - proj1.y};
+//    Vector normal2 = {center.x - proj2.x, center.y - proj2.y};
+//    Vector normal3 = {center.x - proj3.x, center.y - proj3.y};
+//    Vector direct1 = {-normal1.y, normal1.x};
+//    Vector direct2 = {-normal2.y, normal2.x};
+//    Vector direct3 = {-normal3.y, normal3.x};
+//    Pixel intercept1 = line_intercept(direct1, inner_offset1, direct2, inner_offset2);
+//    Pixel intercept2 = line_intercept(direct1, inner_offset1, direct3, inner_offset3);
+//    Pixel intercept3 = line_intercept(direct2, inner_offset2, direct3, inner_offset3);
+//    intercept1.color.g = 180;
+//    intercept2.color.g = 180;
+//    intercept3.color.g = 180;
+//    set_pixel(img, intercept1);
+//    set_pixel(img, intercept2);
+//    set_pixel(img, intercept3);
+    draw_width(img, vertex1, vertex2, vertex3, center, 10);
 }

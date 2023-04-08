@@ -44,9 +44,9 @@ int main (int argc, char *argv[]) {
     fwrite(&dibh, 1, sizeof(DIB_Header), fout);
     fseek(fout, bmfh.offset_to_pixels, SEEK_SET);
     char* garbage = calloc(offset, 1);
-    Pixel point1 = {52, 42, {0, 255, 255}};
-    Pixel point2 = {6,  6, {0, 255, 255}};
-    Pixel point3 = {91, 6, {0, 255, 255}};
+    Pixel point1 = {10, 130, {0, 255, 255}};
+    Pixel point2 = {60,  6, {0, 255, 255}};
+    Pixel point3 = {140, 60, {0, 255, 255}};
     draw_triangle(image, point1, point2, point3);
     for(unsigned int i = image.h; i > 0; i--){
         // writing scansets in reverse order
