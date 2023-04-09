@@ -23,6 +23,8 @@ Pixel center_of_mass(Pixel vertex1, Pixel vertex2, Pixel vertex3) {
 }
 
 Pixel circumscribed_circle_cent(Pixel vertex1, Pixel vertex2, Pixel vertex3) {
+    // center of the outer circle of the triangle
+    // https://www.cyberforum.ru/geometry/thread1190053.html - algorithm
     Pixel center;
     center.color.r = 255; center.color.g = 0; center.color.b = 0;
     int x1 = vertex1.x; int y1 = vertex1.y;
@@ -39,6 +41,7 @@ Pixel circumscribed_circle_cent(Pixel vertex1, Pixel vertex2, Pixel vertex3) {
 }
 
 Pixel get_projection(Pixel p, Pixel vertex1, Pixel vertex2) {
+    // returns projection of the point p on a line containing vertex1 and vertex2
     // direction vector coordinates
     int x1 = vertex2.x - vertex1.x; int y1 = vertex2.y - vertex1.y;
     Pixel center;
@@ -56,7 +59,7 @@ Pixel get_projection(Pixel p, Pixel vertex1, Pixel vertex2) {
         float v2y = (float) vertex2.y;
         float v1x = (float) vertex1.x;
         float v1y = (float) vertex1.y;
-        // two line intercept equation
+        // my algorithm
         float dvy = (float) (v2y - v1y);
         float dvx = (float) (v2x - v1x);
         float k = (float) (dvy / dvx - ny / nx);
@@ -70,6 +73,8 @@ Pixel get_projection(Pixel p, Pixel vertex1, Pixel vertex2) {
 }
 
 Pixel incenter(Pixel vertex1, Pixel vertex2, Pixel vertex3) {
+    // center of the incircle of the triangle
+    // https://www.mathopenref.com/coordincenter.html - algorithm
     Pixel center;
     center.color.r = 255; center.color.g = 0; center.color.b = 0;
     float x1 = (float)vertex1.x; float y1 = (float)vertex1.y;
@@ -89,30 +94,32 @@ Pixel incenter(Pixel vertex1, Pixel vertex2, Pixel vertex3) {
 }
 
 void draw_width(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel center, unsigned thickness) {
+    // TODO undefined behaviour while vertices are equal
+    // WARNING color of the width is given by the vertex1 color
+    // getting projection point of incenter on each edge of the triangle
     Pixel proj1 = get_projection(center, vertex1, vertex2);
     Pixel proj2 = get_projection(center, vertex2, vertex3);
     Pixel proj3 = get_projection(center, vertex1, vertex3);
-    Pixel inner_offset1 = get_inner_vertex(proj1, center, 20);
-    Pixel inner_offset2 = get_inner_vertex(proj2, center, 20);
-    Pixel inner_offset3 = get_inner_vertex(proj3, center, 20);
-    inner_offset3.color.r = 0; inner_offset3.color.g = 255, inner_offset3.color.b = 0;
-    Vector normal1 = {center.x - proj1.x, center.y - proj1.y};
+    // getting point which is located on offset pixel away from projections in triangle
+    Pixel inner_offset1 = get_inner_vertex(proj1, center, thickness);
+    Pixel inner_offset2 = get_inner_vertex(proj2, center, thickness);
+    Pixel inner_offset3 = get_inner_vertex(proj3, center, thickness);
+
+    // getting normal vectors of each edge (perpendiculars that connect an incenter with it projections on each edge)
+    Vector normal1 = {center.x - proj1.x, center.y - proj1.y}; // problem here x = 0
     Vector normal2 = {center.x - proj2.x, center.y - proj2.y};
     Vector normal3 = {center.x - proj3.x, center.y - proj3.y};
+    // direct vectors of the inner triangle edges (actually they are perpendicular to previous normals)
     Vector direct1 = {-normal1.y, normal1.x};
     Vector direct2 = {-normal2.y, normal2.x};
     Vector direct3 = {-normal3.y, normal3.x};
+    // calculating vertices of the inner triangle (they are intercept of each edge)
     Pixel inner_vert1 = line_intercept(direct1, inner_offset1, direct2, inner_offset2);
     Pixel inner_vert2 = line_intercept(direct1, inner_offset1, direct3, inner_offset3);
     Pixel inner_vert3 = line_intercept(direct2, inner_offset2, direct3, inner_offset3);
-    inner_vert1.color.g = 180;
-    inner_vert2.color.g = 180;
-    inner_vert3.color.g = 180;
-    set_pixel(img, inner_vert1);
-    set_pixel(img, inner_vert2);
-    set_pixel(img, inner_vert3);
+    // setting boundaries for triangle (to iterate within it)
     Rectangle rect = Boundary(vertex1, vertex3, vertex2);
-    Pixel p = vertex3;
+    Pixel p = vertex1;
     for(int i = rect.v1.y; i <= rect.v2.y; i++) {
         for(int j = rect.v1.x; j <= rect.v2.x; j++) {
             p.x = j; p.y = i;
@@ -125,7 +132,7 @@ void draw_width(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel c
 }
 
 Pixel get_inner_vertex(Pixel point1, Pixel point2, unsigned offset) {
-    // gets a point on a line, which locates in offset pixels from first point
+    // gets a point on a line, which is located in offset pixels from first point
     int x1 = (int)point1.x;
     int x2 = (int)point2.x;
     int y1 = (int)point1.y;
@@ -172,6 +179,7 @@ Rectangle Boundary(Pixel point1, Pixel point2, Pixel point3) {
 }
 
 void fill_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel p) {
+    // WARNING filling color is set by the color of pixel p
     Rectangle rect = Boundary(vertex1, vertex3, vertex2);
     for (int i = rect.v1.y; i <= rect.v2.y; i++) {
         for (int j = rect.v1.x; j <= rect.v2.x; j++) {
@@ -193,14 +201,14 @@ void draw_outer_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3
 void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3) {
     Pixel p = {0, 0, 255, 255, 255};
     fill_triangle(img, vertex1, vertex2, vertex3, p);
-    draw_outer_triangle(img, vertex1, vertex2, vertex3);
     vertex1.color.r = 255; vertex1.color.g = 0; vertex1.color.b = 0;
-    vertex2.color.r = 0; vertex2.color.g = 255; vertex2.color.b = 0;
-    vertex3.color.r = 0; vertex3.color.g = 0; vertex3.color.b = 255;
-    set_pixel(img, vertex1);
-    set_pixel(img, vertex2);
-    set_pixel(img, vertex3);
     Pixel center = incenter(vertex3, vertex2, vertex1);
+    draw_width(img, vertex1, vertex2, vertex3, center, 130);
+    vertex1.color.r = vertex2.color.r; vertex1.color.g = vertex2.color.g; vertex1.color.b = vertex2.color.b;
+    draw_outer_triangle(img, vertex1, vertex2, vertex3);
+//    set_pixel(img, vertex1);
+//    set_pixel(img, vertex2);
+//    set_pixel(img, vertex3);
 //    Pixel proj1 = get_projection(center, vertex1, vertex2);
 //    set_pixel(img, proj1);
 //    Pixel proj2 = get_projection(center, vertex2, vertex3);
@@ -233,5 +241,4 @@ void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3) {
 //    set_pixel(img, intercept1);
 //    set_pixel(img, intercept2);
 //    set_pixel(img, intercept3);
-    draw_width(img, vertex1, vertex2, vertex3, center, 10);
 }
