@@ -43,6 +43,7 @@ Pixel circumscribed_circle_cent(Pixel vertex1, Pixel vertex2, Pixel vertex3) {
 Pixel get_projection(Pixel p, Pixel vertex1, Pixel vertex2) {
     // returns projection of the point p on a line containing vertex1 and vertex2
     // direction vector coordinates
+    // my algorithm
     int x1 = vertex2.x - vertex1.x; int y1 = vertex2.y - vertex1.y;
     Pixel center;
     center.color.r = 255; center.color.g = 0; center.color.b = 0;
@@ -94,7 +95,6 @@ Pixel incenter(Pixel vertex1, Pixel vertex2, Pixel vertex3) {
 }
 
 void draw_width(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel center, unsigned thickness) {
-    // TODO undefined behaviour while vertices are equal
     // WARNING color of the width is given by the vertex1 color
     // getting projection point of incenter on each edge of the triangle
     Pixel proj1 = get_projection(center, vertex1, vertex2);
@@ -203,7 +203,7 @@ void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3) {
     fill_triangle(img, vertex1, vertex2, vertex3, p);
     vertex1.color.r = 255; vertex1.color.g = 0; vertex1.color.b = 0;
     Pixel center = incenter(vertex3, vertex2, vertex1);
-    draw_width(img, vertex1, vertex2, vertex3, center, 130);
+//    draw_width(img, vertex1, vertex2, vertex3, center, 40);
     vertex1.color.r = vertex2.color.r; vertex1.color.g = vertex2.color.g; vertex1.color.b = vertex2.color.b;
     draw_outer_triangle(img, vertex1, vertex2, vertex3);
 //    set_pixel(img, vertex1);
