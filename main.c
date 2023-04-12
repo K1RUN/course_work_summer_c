@@ -48,15 +48,6 @@ int main (int argc, char *argv[]) {
     // finding the biggest white rect
     Rgb white = {255, 255, 255};
     Rgb red = {0, 0, 255};
-    Pixel red_p = {0, 0, red};
-    Pixel red_p2 = {80, 300, red};
-    Rectangle rect = {red_p, red_p2};
-//    fill_rect(image, rect, red);
-    set_pixel(image, red_p);
-    red_p.y = 250;
-    red_p2.x = 600;
-    Rectangle rect2 = {red_p, red_p2};
-//    fill_rect(image, rect2, red);
     find_and_recolor(image, white, red);
     for(unsigned int i = image.h; i > 0; i--) {
         // writing scansets in reverse order
