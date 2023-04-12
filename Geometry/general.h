@@ -14,11 +14,6 @@
      _a > _b ? _a : _b; })
 
 typedef struct {
-    Pixel v1;
-    Pixel v2;
-} Rectangle;
-
-typedef struct {
     int x; int y;
 } Vector;
 

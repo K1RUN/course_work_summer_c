@@ -4,6 +4,7 @@
 #include "../BMP_parser/bmp_structs.h"
 #include "general.h"
 #include "line_draw.h"
+#include "rectangle.h"
 
 bool is_in_triangle(Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel point);
 void draw_width(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel center, unsigned thickness);

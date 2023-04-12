@@ -6,10 +6,11 @@
 #include <getopt.h>
 #include <stdlib.h>
 #include "Geometry/triangle.h"
+#include "Geometry/rectangle.h"
 #include "Geometry/find_max_rect.h"
 
 int main (int argc, char *argv[]) {
-    char *filename = "tiny11_11.bmp";
+    char *filename = "simpsonsvr.bmp";
     char *mode = "rb";
     if(argc == 1) {
         print_help();
@@ -44,34 +45,24 @@ int main (int argc, char *argv[]) {
     fwrite(&dibh, 1, sizeof(DIB_Header), fout);
     fseek(fout, bmfh.offset_to_pixels, SEEK_SET);
     char* garbage = calloc(offset, 1);
-    Pixel point1 = {1, 3, {255, 255, 255}};
-    Pixel point2 = {7,  1, {255, 255, 255}};
-    Pixel point3 = {6, 7, {255, 255, 255}};
-    draw_triangle(image, point1, point2, point3);
     // finding the biggest white rect
-    Rgb color = {255, 255, 255};
-    Sub_matrix subMatrix = get_color_matrix(image, color);
-    print_matrix(subMatrix);
-    make_histogram(&subMatrix);
-    printf("\n");
-    print_matrix(subMatrix);
-    Rectangle rect = find_largest_rect(subMatrix);
-    Pixel p1 = rect.v1; Pixel p3 = rect.v2;
-    Pixel p2 = {p1.x, p3.y, {0, 0, 255}};
-    Pixel p4 = {p3.x, p1.y, {0, 0, 255}};
-    p1.color.r = 255; p1.color.g = 0; p1.color.b = 0;
-    p3.color.r = 255; p3.color.g = 0; p3.color.b = 0;
-    Bresenham(image, p1, p2);
-    Bresenham(image, p1, p4);
-    Bresenham(image, p3, p2);
-    Bresenham(image, p3, p4);
+    Rgb white = {255, 255, 255};
+    Rgb red = {0, 0, 255};
+    Pixel red_p = {0, 0, red};
+    Pixel red_p2 = {80, 300, red};
+    Rectangle rect = {red_p, red_p2};
+//    fill_rect(image, rect, red);
+    set_pixel(image, red_p);
+    red_p.y = 250;
+    red_p2.x = 600;
+    Rectangle rect2 = {red_p, red_p2};
+//    fill_rect(image, rect2, red);
+    find_and_recolor(image, white, red);
     for(unsigned int i = image.h; i > 0; i--) {
         // writing scansets in reverse order
         fwrite(image.matrix[i - 1], 1, image.w * sizeof(Rgb), fout);
         fwrite(garbage, 1, offset, fout);
     }
-    printf("%ld\n", sizeof(Bitmap_File_Header));
-    printf("%ld\n", sizeof(DIB_Header));
     fclose(fout);
     return 0;
 }
