@@ -37,6 +37,10 @@ Pixel line_intercept(Vector direct1, Pixel point1, Vector direct2, Pixel point2)
     float y1 = (float)point1.y; float x1 = (float)point1.x;
     float y2 = (float)point2.y; float x2 = (float)point2.x;
     // situation where line is parallel to oX axis or oY axis
+    if (direct1.x == 0 && direct2.x == 0 || direct2.y == 0 && direct1.y == 0) {
+        intercept.x = -1; intercept.y = -1;
+        return intercept;
+    }
     if (direct1.x == 0 || direct2.x == 0) {
         if (direct1.x == 0) {
             x = (float)point1.x;

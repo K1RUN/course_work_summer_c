@@ -76,6 +76,7 @@ Pixel get_projection(Pixel p, Pixel vertex1, Pixel vertex2) {
 Pixel incenter(Pixel vertex1, Pixel vertex2, Pixel vertex3) {
     // center of the incircle of the triangle
     // https://www.mathopenref.com/coordincenter.html - algorithm
+    // https://www.wolframalpha.com/widgets/view.jsp?id=f0ee3310223fe38a989b2c818709393
     Pixel center;
     center.color.r = 255; center.color.g = 0; center.color.b = 0;
     float x1 = (float)vertex1.x; float y1 = (float)vertex1.y;
@@ -94,9 +95,10 @@ Pixel incenter(Pixel vertex1, Pixel vertex2, Pixel vertex3) {
     return center;
 }
 
-void draw_width(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel center, unsigned thickness) {
+bool draw_width_incenter(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, unsigned thickness) {
     // WARNING color of the width is given by the vertex1 color
     // getting projection point of incenter on each edge of the triangle
+    Pixel center = incenter(vertex3, vertex2, vertex1);
     Pixel proj1 = get_projection(center, vertex1, vertex2);
     Pixel proj2 = get_projection(center, vertex2, vertex3);
     Pixel proj3 = get_projection(center, vertex1, vertex3);
@@ -104,7 +106,6 @@ void draw_width(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel c
     Pixel inner_offset1 = get_inner_vertex(proj1, center, thickness);
     Pixel inner_offset2 = get_inner_vertex(proj2, center, thickness);
     Pixel inner_offset3 = get_inner_vertex(proj3, center, thickness);
-
     // getting normal vectors of each edge (perpendiculars that connect an incenter with it projections on each edge)
     Vector normal1 = {center.x - proj1.x, center.y - proj1.y}; // problem here x = 0
     Vector normal2 = {center.x - proj2.x, center.y - proj2.y};
@@ -113,10 +114,15 @@ void draw_width(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel c
     Vector direct1 = {-normal1.y, normal1.x};
     Vector direct2 = {-normal2.y, normal2.x};
     Vector direct3 = {-normal3.y, normal3.x};
-    // calculating vertices of the inner triangle (they are intercept of each edge)
+    // calculating vertices of the inner triangle (they are intercept of each edge) // TODO
+    // WARNING https://www.desmos.com/calculator/2iiwgyekaf
     Pixel inner_vert1 = line_intercept(direct1, inner_offset1, direct2, inner_offset2);
     Pixel inner_vert2 = line_intercept(direct1, inner_offset1, direct3, inner_offset3);
     Pixel inner_vert3 = line_intercept(direct2, inner_offset2, direct3, inner_offset3);
+    if (inner_vert1.x == -1 || inner_vert2.x == -1 || inner_vert3.x == -1) {
+        // may be some situations where is not possible to draw an inner rectangle due to rounding to int
+        return false;
+    }
     // setting boundaries for triangle (to iterate within it)
     Rectangle rect = Boundary(vertex1, vertex3, vertex2);
     Pixel p = vertex1;
@@ -129,7 +135,33 @@ void draw_width(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel c
             }
         }
     }
+    return true;
 }
+
+void draw_width_center_mass(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, unsigned thickness) {
+    // arr for storing pixels that connect center of homethety and vertices
+    Pixel center = center_of_mass(vertex3, vertex2, vertex1);
+    set_pixel(img, center);
+    Pixel inner_vert1 = get_inner_vertex(vertex1, center, thickness);
+    Bresenham(img, center, vertex1);
+    Pixel inner_vert2 = get_inner_vertex(vertex2, center, thickness);
+    Bresenham(img, center, vertex2);
+    Pixel inner_vert3 = get_inner_vertex(vertex3, center, thickness);
+    Bresenham(img, center, vertex3);
+    Rectangle rect = Boundary(vertex1, vertex3, vertex2);
+    Pixel p = vertex1;
+    for (int i = rect.v1.y; i <= rect.v2.y; i++) {
+        for (int j = rect.v1.x; j <= rect.v2.x; j++) {
+            p.x = j;
+            p.y = i;
+            if (is_in_triangle(vertex1, vertex2, vertex3, p) == true &&
+                is_in_triangle(inner_vert1, inner_vert2, inner_vert3, p) == false) {
+                set_pixel(img, p);
+            }
+        }
+    }
+}
+
 
 Pixel get_inner_vertex(Pixel point1, Pixel point2, unsigned offset) {
     // gets a point on a line, which is located in offset pixels from first point
@@ -198,47 +230,28 @@ void draw_outer_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3
     Bresenham(img, vertex1, vertex3);
 }
 
-void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3) {
-    Pixel p = {0, 0, 255, 255, 255};
-    fill_triangle(img, vertex1, vertex2, vertex3, p);
-    vertex1.color.r = 255; vertex1.color.g = 0; vertex1.color.b = 0;
-    Pixel center = incenter(vertex3, vertex2, vertex1);
-//    draw_width(img, vertex1, vertex2, vertex3, center, 40);
-    vertex1.color.r = vertex2.color.r; vertex1.color.g = vertex2.color.g; vertex1.color.b = vertex2.color.b;
+void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, int thickness, Rgb line_color, bool fill, Rgb fill_color) {
+    if(vertex1.x == vertex2.x && vertex1.x == vertex3.x || vertex1.y == vertex2.y && vertex1.y == vertex3.y) {
+        fprintf(stderr, "Wrong pixels");
+        return;
+    }
+    vertex1.color.r = line_color.r; vertex1.color.g = line_color.g; vertex1.color.b = line_color.b;
+    vertex2.color.r = line_color.r; vertex2.color.g = line_color.g; vertex2.color.b = line_color.b;
+    vertex3.color.r = line_color.r; vertex3.color.g = line_color.g; vertex3.color.b = line_color.b;
+    if(fill == true) {
+        Pixel p = {0, 0};
+        p.color.r = fill_color.r;
+        p.color.g = fill_color.g;
+        p.color.b = fill_color.b;
+        fill_triangle(img, vertex1, vertex2, vertex3, p);
+    }
+    if(thickness <= 0) {
+        fprintf(stderr, "wrong thickness value was given");
+        return;
+    }
+    vertex1.color.r = line_color.r; vertex1.color.g = line_color.g; vertex1.color.b = line_color.b;
+    if(draw_width_incenter(img, vertex1, vertex2, vertex3, thickness) == false){
+        draw_width_center_mass(img, vertex1, vertex2, vertex3, thickness);
+    }
     draw_outer_triangle(img, vertex1, vertex2, vertex3);
-//    set_pixel(img, vertex1);
-//    set_pixel(img, vertex2);
-//    set_pixel(img, vertex3);
-//    Pixel proj1 = get_projection(center, vertex1, vertex2);
-//    set_pixel(img, proj1);
-//    Pixel proj2 = get_projection(center, vertex2, vertex3);
-//    set_pixel(img, proj2);
-//    Pixel proj3 = get_projection(center, vertex1, vertex3);
-//    set_pixel(img, proj3);
-//    Homothety(img, vertex1, vertex2, vertex3, center, 20);
-//    set_pixel(img, center);
-//    Homothety(img, proj1, proj2, proj3, center, 10);
-//    Bresenham(img, proj1, center);
-//    Bresenham(img, proj2, center);
-//    Bresenham(img, proj3, center);
-//    Pixel inner_offset1 = get_inner_vertex(proj1, center, 100);
-//    Pixel inner_offset2 = get_inner_vertex(proj2, center, 100);
-//    Pixel inner_offset3 = get_inner_vertex(proj3, center, 100);
-//    inner_offset3.color.r = 0; inner_offset3.color.g = 255, inner_offset3.color.b = 0;
-//    set_pixel(img, inner_offset3);
-//    Vector normal1 = {center.x - proj1.x, center.y - proj1.y};
-//    Vector normal2 = {center.x - proj2.x, center.y - proj2.y};
-//    Vector normal3 = {center.x - proj3.x, center.y - proj3.y};
-//    Vector direct1 = {-normal1.y, normal1.x};
-//    Vector direct2 = {-normal2.y, normal2.x};
-//    Vector direct3 = {-normal3.y, normal3.x};
-//    Pixel intercept1 = line_intercept(direct1, inner_offset1, direct2, inner_offset2);
-//    Pixel intercept2 = line_intercept(direct1, inner_offset1, direct3, inner_offset3);
-//    Pixel intercept3 = line_intercept(direct2, inner_offset2, direct3, inner_offset3);
-//    intercept1.color.g = 180;
-//    intercept2.color.g = 180;
-//    intercept3.color.g = 180;
-//    set_pixel(img, intercept1);
-//    set_pixel(img, intercept2);
-//    set_pixel(img, intercept3);
 }

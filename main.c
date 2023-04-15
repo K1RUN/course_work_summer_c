@@ -10,7 +10,7 @@
 #include "Geometry/find_max_rect.h"
 
 int main (int argc, char *argv[]) {
-    char *filename = "simpsonsvr.bmp";
+    char *filename = "huge_image.bmp";
     char *mode = "rb";
     if(argc == 1) {
         print_help();
@@ -35,7 +35,8 @@ int main (int argc, char *argv[]) {
         // scansets come in reverse order by default, so reading it inverse
         image.matrix[i - 1] = calloc(image.w*sizeof(Rgb), 1);
         if (fread(image.matrix[i - 1], 1, image.w*sizeof(Rgb), fp) != image.w*sizeof(Rgb)) {
-            process_error(FREAD_ERR); break;
+            process_error(FREAD_ERR);
+            return -1;
         }
         fseek(fp, offset, SEEK_CUR);
     }
@@ -45,10 +46,15 @@ int main (int argc, char *argv[]) {
     fwrite(&dibh, 1, sizeof(DIB_Header), fout);
     fseek(fout, bmfh.offset_to_pixels, SEEK_SET);
     char* garbage = calloc(offset, 1);
-    // finding the biggest white rect
+    Pixel v1 = {1520, 20, {100, 120, 250}};
+    Pixel v2 = {1500, 1550, {100, 120, 250}};
+    Pixel v3 = {1500, 155, {100, 120, 250}};
+    Rgb line_color = {255, 255, 255};
+    Rgb fill_color = {255, 0, 255};
+    draw_triangle(image, v1, v2, v3, 30, line_color, true, fill_color);
     Rgb white = {255, 255, 255};
     Rgb red = {0, 0, 255};
-    find_and_recolor(image, white, red);
+    //find_and_recolor(image, white, red);
     for(unsigned int i = image.h; i > 0; i--) {
         // writing scansets in reverse order
         fwrite(image.matrix[i - 1], 1, image.w * sizeof(Rgb), fout);

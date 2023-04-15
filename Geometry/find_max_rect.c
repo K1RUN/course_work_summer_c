@@ -150,7 +150,6 @@ Rectangle find_largest_rect(Sub_matrix histogram) {
 
 void find_and_recolor(Pixels img, Rgb old_color, Rgb new_color) {
     Sub_matrix ones_matrix = get_color_matrix(img, old_color);
-    print_matrix(ones_matrix);
     if(make_histogram(&ones_matrix) == false) {
         printf("There is no rectangle of the given color\n");
         destroy_matrix(&ones_matrix);
