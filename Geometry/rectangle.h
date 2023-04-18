@@ -1,6 +1,6 @@
 #ifndef MY_RECTANGLE_H
 #define MY_RECTANGLE_H
-#include "../BMP_parser/bmp_structs.h"
+#include "../Image/bmp_structs.h"
 #include "general.h"
 #include "line_draw.h"
 typedef struct {

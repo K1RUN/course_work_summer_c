@@ -1,7 +1,7 @@
 #ifndef MY_TRIANGLE_H
 #define MY_TRIANGLE_H
 #include <stdbool.h>
-#include "../BMP_parser/bmp_structs.h"
+#include "../Image/bmp_structs.h"
 #include "general.h"
 #include "line_draw.h"
 #include "rectangle.h"

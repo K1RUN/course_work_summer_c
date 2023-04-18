@@ -1,16 +1,16 @@
 #include "CLI/helpmenu.h"
-#include "BMP_parser/bmp_parser.h"
-#include "BMP_parser/bmp_structs.h"
+#include "Image/bmp_parser.h"
+#include "Image/bmp_structs.h"
+#include "Image/canvas.h"
 #include "Error_handling/error_handler.h"
 #include <stdio.h>
 #include <getopt.h>
 #include <stdlib.h>
 #include "Geometry/triangle.h"
-#include "Geometry/rectangle.h"
 #include "Geometry/find_max_rect.h"
 
 int main (int argc, char *argv[]) {
-    char *filename = "huge_image.bmp";
+    char *filename = "huge.bmp";
     char *mode = "rb";
     if(argc == 1) {
         print_help();
@@ -23,43 +23,16 @@ int main (int argc, char *argv[]) {
     print_file_header(bmfh);
     fread(&dibh, 1, sizeof(DIB_Header), fp);
     print_dib_header(dibh);
-    Pixels image;
-    image.h = dibh.image_height;
-    // width of every scanset including trash
-    image.w = dibh.image_width;
-    unsigned short offset = image.w * sizeof(Rgb) % 4;
-    offset = offset ? 4 - offset : 0;
-    image.matrix = malloc(image.h * sizeof(Rgb*));
-    fseek(fp, bmfh.offset_to_pixels, SEEK_SET);
-    for(unsigned int i = image.h; i != 0; i--){
-        // scansets come in reverse order by default, so reading it inverse
-        image.matrix[i - 1] = calloc(image.w*sizeof(Rgb), 1);
-        if (fread(image.matrix[i - 1], 1, image.w*sizeof(Rgb), fp) != image.w*sizeof(Rgb)) {
-            process_error(FREAD_ERR);
-            return -1;
-        }
-        fseek(fp, offset, SEEK_CUR);
-    }
     fclose(fp);
-    FILE* fout = fopen("result.bmp", "wb");
-    fwrite(&bmfh, 1, sizeof(Bitmap_File_Header), fout);
-    fwrite(&dibh, 1, sizeof(DIB_Header), fout);
-    fseek(fout, bmfh.offset_to_pixels, SEEK_SET);
-    char* garbage = calloc(offset, 1);
-    Pixel v1 = {1520, 20, {100, 120, 250}};
-    Pixel v2 = {1500, 1550, {100, 120, 250}};
-    Pixel v3 = {1500, 155, {100, 120, 250}};
-    Rgb line_color = {255, 255, 255};
-    Rgb fill_color = {255, 0, 255};
-    draw_triangle(image, v1, v2, v3, 30, line_color, true, fill_color);
-    Rgb white = {255, 255, 255};
-    Rgb red = {0, 0, 255};
-    //find_and_recolor(image, white, red);
-    for(unsigned int i = image.h; i > 0; i--) {
-        // writing scansets in reverse order
-        fwrite(image.matrix[i - 1], 1, image.w * sizeof(Rgb), fout);
-        fwrite(garbage, 1, offset, fout);
-    }
-    fclose(fout);
+    Pixels image = create_canvas(dibh.image_height, dibh.image_width);
+    canvas_draw(image, filename);
+    Pixel v1 = {0, 0, {100, 120, 250}};
+    Pixel v2 = {100, 200, {100, 120, 250}};
+    Pixel v3 = {500, 650, {100, 120, 250}};
+    Rgb line_color = {0, 0, 255};
+    Rgb fill_color = {0, 0, 0};
+    draw_triangle(image, v1, v2, v3, 5, line_color, true, fill_color);
+    canvas_write(image, filename, "result.bmp");
+    free_canvas(image);
     return 0;
 }

@@ -2,7 +2,7 @@
 #define MY_GENERAL_H
 #include <stdbool.h>
 #include <stdlib.h>
-#include "../BMP_parser/bmp_structs.h"
+#include "../Image/bmp_structs.h"
 #define BUF 10
 #define min(a,b) \
    ({ __typeof__ (a) _a = (a); \

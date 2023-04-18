@@ -141,13 +141,9 @@ bool draw_width_incenter(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3
 void draw_width_center_mass(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, unsigned thickness) {
     // arr for storing pixels that connect center of homethety and vertices
     Pixel center = center_of_mass(vertex3, vertex2, vertex1);
-    set_pixel(img, center);
     Pixel inner_vert1 = get_inner_vertex(vertex1, center, thickness);
-    Bresenham(img, center, vertex1);
     Pixel inner_vert2 = get_inner_vertex(vertex2, center, thickness);
-    Bresenham(img, center, vertex2);
     Pixel inner_vert3 = get_inner_vertex(vertex3, center, thickness);
-    Bresenham(img, center, vertex3);
     Rectangle rect = Boundary(vertex1, vertex3, vertex2);
     Pixel p = vertex1;
     for (int i = rect.v1.y; i <= rect.v2.y; i++) {
@@ -249,9 +245,10 @@ void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, int 
         fprintf(stderr, "wrong thickness value was given");
         return;
     }
-    vertex1.color.r = line_color.r; vertex1.color.g = line_color.g; vertex1.color.b = line_color.b;
-    if(draw_width_incenter(img, vertex1, vertex2, vertex3, thickness) == false){
+    if(thickness != 1 && draw_width_incenter(img, vertex1, vertex2, vertex3, thickness) == false){
         draw_width_center_mass(img, vertex1, vertex2, vertex3, thickness);
     }
-    draw_outer_triangle(img, vertex1, vertex2, vertex3);
+    if(thickness == 1) {
+        draw_outer_triangle(img, vertex1, vertex2, vertex3);
+    }
 }

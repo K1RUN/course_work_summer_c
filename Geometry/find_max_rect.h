@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include "general.h"
-#include "../BMP_parser/bmp_structs.h"
+#include "../Image/bmp_structs.h"
 #include "../Stack/stack.h"
 #include "rectangle.h"
 
