@@ -21,7 +21,7 @@ void create_collage(Pixels *image, int n, int m) {
                 paste_images(canvas, *image, image->w * j, image->h * i);
             }
         }
-        free(image->matrix);
+        free_canvas(*image);
         *image = canvas;
     }
 }
