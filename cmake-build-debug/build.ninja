@@ -133,6 +133,18 @@ build CMakeFiles/my.dir/Image/collage.c.o: C_COMPILER__my_Debug /home/samsepi/Do
   OBJECT_DIR = CMakeFiles/my.dir
   OBJECT_FILE_DIR = CMakeFiles/my.dir/Image
 
+build CMakeFiles/my.dir/CLI/parse_triangle.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/CLI/parse_triangle.c || cmake_object_order_depends_target_my
+  DEP_FILE = CMakeFiles/my.dir/CLI/parse_triangle.c.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  OBJECT_DIR = CMakeFiles/my.dir
+  OBJECT_FILE_DIR = CMakeFiles/my.dir/CLI
+
+build CMakeFiles/my.dir/CLI/commands.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/CLI/commands.c || cmake_object_order_depends_target_my
+  DEP_FILE = CMakeFiles/my.dir/CLI/commands.c.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  OBJECT_DIR = CMakeFiles/my.dir
+  OBJECT_FILE_DIR = CMakeFiles/my.dir/CLI
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target my
@@ -141,7 +153,7 @@ build CMakeFiles/my.dir/Image/collage.c.o: C_COMPILER__my_Debug /home/samsepi/Do
 #############################################
 # Link the executable my
 
-build my: C_EXECUTABLE_LINKER__my_Debug CMakeFiles/my.dir/main.c.o CMakeFiles/my.dir/CLI/helpmenu.c.o CMakeFiles/my.dir/Error_handling/log.c.o CMakeFiles/my.dir/Error_handling/error_handler.c.o CMakeFiles/my.dir/Image/bmp_parser.c.o CMakeFiles/my.dir/Geometry/line_draw.c.o CMakeFiles/my.dir/Geometry/general.c.o CMakeFiles/my.dir/Geometry/triangle.c.o CMakeFiles/my.dir/CLI/command_parser.c.o CMakeFiles/my.dir/Stack/stack.c.o CMakeFiles/my.dir/Geometry/find_max_rect.c.o CMakeFiles/my.dir/Geometry/rectangle.c.o CMakeFiles/my.dir/Image/canvas.c.o CMakeFiles/my.dir/Image/collage.c.o
+build my: C_EXECUTABLE_LINKER__my_Debug CMakeFiles/my.dir/main.c.o CMakeFiles/my.dir/CLI/helpmenu.c.o CMakeFiles/my.dir/Error_handling/log.c.o CMakeFiles/my.dir/Error_handling/error_handler.c.o CMakeFiles/my.dir/Image/bmp_parser.c.o CMakeFiles/my.dir/Geometry/line_draw.c.o CMakeFiles/my.dir/Geometry/general.c.o CMakeFiles/my.dir/Geometry/triangle.c.o CMakeFiles/my.dir/CLI/command_parser.c.o CMakeFiles/my.dir/Stack/stack.c.o CMakeFiles/my.dir/Geometry/find_max_rect.c.o CMakeFiles/my.dir/Geometry/rectangle.c.o CMakeFiles/my.dir/Image/canvas.c.o CMakeFiles/my.dir/Image/collage.c.o CMakeFiles/my.dir/CLI/parse_triangle.c.o CMakeFiles/my.dir/CLI/commands.c.o
   FLAGS = -g
   LINK_LIBRARIES = -lm
   OBJECT_DIR = CMakeFiles/my.dir

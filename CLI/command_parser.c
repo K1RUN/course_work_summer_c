@@ -1,6 +1,7 @@
 #include "command_parser.h"
 
 int parse_commands(int argc, char* argv[]) {
+    printf(ANSI_COLOR_GREEN);
     opterr = 0;
     int command_flag = UNKNOWN;
     char* opts = "hi:";
@@ -17,9 +18,7 @@ int parse_commands(int argc, char* argv[]) {
     if(opt != 0) {
         switch (opt) {
             case 'i': {
-                printf("FILE_INFO");
-                printf("%s", optarg);
-                // TODO: parse file_info function;
+                print_info(optarg);
                 break;
             }
             case 'h':
@@ -33,8 +32,7 @@ int parse_commands(int argc, char* argv[]) {
                 print_help(); break;
             }
             case FILE_INFO: {
-                printf("FILE_INFO\n");
-                printf("%s", optarg);
+                print_info(optarg);
                 break;
             }
             case TRIANGLE: {
@@ -59,5 +57,6 @@ int parse_commands(int argc, char* argv[]) {
             }
         }
     }
+    printf(ANSI_COLOR_RESET);
     return long_index;
 }
