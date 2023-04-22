@@ -26,7 +26,6 @@ bool open_bmp(char* filename, char* mode) {
     FILE* fp = fopen(filename, mode);
     if(fp == NULL) {
         process_error(FOPEN_ERR);
-        fclose(fp);
         return false;
     }
     fclose(fp);
@@ -56,4 +55,16 @@ DIB_Header parse_dib(char* filename) {
     fread(&dibh, 1, sizeof(DIB_Header), fp);
     fclose(fp);
     return dibh;
+}
+
+void print_info(char* filename) {
+    if(open_bmp(filename, "rb") == false) {
+        fprintf(stderr, "There is no file with name %s in current directory", filename);
+        return;
+    }
+    printf("FILE INFO\n");
+    Bitmap_File_Header bmfh = parse_bmfh(filename);
+    DIB_Header dibh = parse_dib(filename);
+    print_file_header(bmfh);
+    print_dib_header(dibh);
 }
