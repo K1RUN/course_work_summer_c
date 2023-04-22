@@ -35,11 +35,6 @@ int main (int argc, char *argv[]) {
 //    draw_triangle(image, v1, v2, v3, 1, white, false, white);
 //    canvas_write(image, filename, "result.bmp");
 //    free_canvas(image);
-    char* coords = malloc(10);
-    strcpy(coords, "2565,254");
-    Coords p;
-    bool fine = scan_coords(coords, &p);
-    printf("%d %d", p.x, p.y);
-//    printf("\n%d\n", parse_commands(argc, argv));
+    parse_commands(argc, argv);
     return 0;
 }
