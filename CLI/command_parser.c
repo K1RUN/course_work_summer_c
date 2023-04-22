@@ -36,8 +36,7 @@ int parse_commands(int argc, char* argv[]) {
                 break;
             }
             case TRIANGLE: {
-                printf("TRIANGLE");
-                // TODO: parse triangle function
+                parse_triangle(argc, argv);
                 break;
             }
             case FIND_RECT: {
