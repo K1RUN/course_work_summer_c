@@ -41,4 +41,5 @@ unsigned short get_offset(size_t width);
 Bitmap_File_Header parse_bmfh(char* filename);
 DIB_Header parse_dib(char* filename);
 void print_info(char * filename);
+bool check_file(char* filename);
 #endif //MY_BMP_PARSER_H

@@ -57,10 +57,6 @@ void canvas_write(Pixels canvas, char *filename_old, char *filename_new) {
     bmfh.file_size = new_file_size;
     dibh.image_width = new_width; dibh.image_height = new_height;
     dibh.image_size = new_image_size;
-    // DEBUG: delete this
-    printf("\nNEW\n");
-    print_file_header(bmfh);
-    print_dib_header(dibh);
     fwrite(&bmfh, 1, sizeof(Bitmap_File_Header), fout);
     fwrite(&dibh, 1, sizeof(DIB_Header), fout);
     fseek(fout, bmfh.offset_to_pixels, SEEK_SET);
