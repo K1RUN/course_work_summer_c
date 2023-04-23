@@ -32,6 +32,25 @@ bool open_bmp(char* filename, char* mode) {
     return true;
 }
 
+bool check_file(char* filename) {
+    if(open_bmp(filename, "rb") == false) return false;
+    Bitmap_File_Header bmfh = parse_bmfh(filename);
+    DIB_Header dibh = parse_dib(filename);
+    if(bmfh.signature != 0x4d42) {
+        fprintf(stderr, "File %s is not a BMP file\n", filename);
+        return false;
+    }
+    if(dibh.dib_header_size != 40) {
+        fprintf(stderr, "This version of BMP is not supported in this program\n");
+        return false;
+    }
+    if(dibh.compression != 0) {
+        fprintf(stderr, "BMP image has a compression property\n");
+        return false;
+    }
+    return true;
+}
+
 unsigned short get_offset(size_t width) {
     unsigned short offset = width * sizeof(Rgb) % 4;
     offset = offset ? 4 - offset : 0;
