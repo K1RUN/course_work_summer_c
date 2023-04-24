@@ -25,9 +25,8 @@ const char* helpmenu =  "██████  ███    ███ ████
                         "                -n, --new_file <file>.bmp  saves processed image to a new file (optional)\n"
                         "\n"
                         "            --collage [options]\n"
-                        "                -x, --number1 number       the number of the images by x-axis\n"
-                        "                -y, --number2 number       the number of the images by y-axis\n"
-                        "                -i, --images  images       the images to fill\n"
+                        "                -x, --x_num number       the number of the images by x-axis\n"
+                        "                -y, --y_num number       the number of the images by y-axis\n"
                         "                -n, --new_file <file>.bmp  saves processed image to a new file (optional)\n"
                         "\n";
 

@@ -3,6 +3,8 @@
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 #include "parse_triangle.h"
+#include "parse_find_rect.h"
+#include "parse_collage.h"
 #include "getopt.h"
 #include "commands.h"
 #include "helpmenu.h"
