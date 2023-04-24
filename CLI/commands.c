@@ -41,6 +41,9 @@ bool scan_number(char* string, int* dest) {
     int num = (int)strtol(string, &end, 10);
     if(*end == '\0') {
         *dest = num;
+        if(num <= 0) {
+            fprintf(stderr, "Warning: non-positive number was given\n");
+        }
         return true;
     }
     return false;

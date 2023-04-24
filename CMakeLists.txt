@@ -8,6 +8,7 @@ add_executable(my main.c CLI/helpmenu.c Error_handling/log.c Error_handling/erro
                 Geometry/general.c Geometry/general.h Geometry/triangle.c Geometry/triangle.h CLI/command_parser.c
                 CLI/command_parser.h Stack/stack.c Stack/stack.h Geometry/find_max_rect.c Geometry/find_max_rect.h
                 Geometry/rectangle.c Image/canvas.c Image/canvas.h Image/collage.h Image/collage.c CLI/commands.h
-                CLI/parse_triangle.h CLI/parse_triangle.c CLI/commands.c)
+                CLI/parse_triangle.h CLI/parse_triangle.c CLI/commands.c CLI/parse_find_rect.h CLI/parse_find_rect.c
+                CLI/parse_collage.h CLI/parse_collage.c)
 
 target_link_libraries(my m)

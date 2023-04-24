@@ -78,7 +78,7 @@ DIB_Header parse_dib(char* filename) {
 
 void print_info(char* filename) {
     if(open_bmp(filename, "rb") == false) {
-        fprintf(stderr, "There is no file with name %s in current directory", filename);
+        fprintf(stderr, "There is no file with name %s in current directory\n", filename);
         return;
     }
     printf("FILE INFO\n");

@@ -116,7 +116,7 @@ void parse_triangle(int argc, char* argv[]) {
         }
     }
     // if one of the params is missing
-    if(sum < REQUIRED) {
+    if(sum < REQUIRED_TRIANGLE) {
         fprintf(stderr, "Too few params\n");
         print_help();
         return;

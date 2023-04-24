@@ -40,13 +40,11 @@ int parse_commands(int argc, char* argv[]) {
                 break;
             }
             case FIND_RECT: {
-                printf("FIND_RECT");
-                // TODO: parse find_rect function
+                parse_find_rect(argc, argv);
                 break;
             }
             case COLLAGE: {
-                printf("COLLAGE");
-                // TODO: parse collage function
+                parse_collage(argc, argv);
                 break;
             }
             case UNKNOWN:
