@@ -63,7 +63,7 @@ bool scan_RGB(char* rgb_str, Rgb* color) {
         int B = (int)strtol(part3, &end3, 10);
         if(*end1 == '\0' && *end2 == '\0' && *end3 == '\0') {
             if(R < 0 || R > 255 || G < 0 || G > 255 || B < 0 || B > 255) {
-                fprintf(stderr, "Warning: one of the color numbers is bigger than 1 byte\n");
+                fprintf(stderr, "Warning: one of the colors is out of range\n");
             }
             color->r = (unsigned char)R; color->g = (unsigned char)G; color->b = (unsigned char)B;
             return true;

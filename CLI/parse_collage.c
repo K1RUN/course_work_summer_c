@@ -1,7 +1,7 @@
 #include "parse_collage.h"
 
 void parse_collage(int argc, char* argv[]) {
-    char* opts = "m:f:n:";
+    char* opts = "x:y:n:";
     collage collage_opts;
     bool create_new_file = false;
     int longIndex;
@@ -22,18 +22,22 @@ void parse_collage(int argc, char* argv[]) {
             case 'x': {
                 char* string = copy_string(optarg); int x_num;
                 if(scan_number(string, &x_num) == false) {
-                    fprintf(stderr, "Invalid option for max rectangle color %s\n", optarg);
+                    fprintf(stderr, "Invalid option for x number %s\n", optarg);
+                    free(string);
                     return;
                 }
+                free(string);
                 collage_opts.x_num = x_num; sum |= 1;
                 break;
             }
             case 'y': {
                 char* string = copy_string(optarg); int y_num;
                 if(scan_number(string, &y_num) == false) {
-                    fprintf(stderr, "Invalid option for filling color %s\n", optarg);
+                    fprintf(stderr, "Invalid option for y number %s\n", optarg);
+                    free(string);
                     return;
                 }
+                free(string);
                 collage_opts.y_num = y_num; sum |= (1 << 1);
                 break;
             }
@@ -60,19 +64,23 @@ void parse_collage(int argc, char* argv[]) {
             }
             case '?':
             default: {
-                printf("Unknown %c flag\n", optopt);
+                printf("Unknown flag\n");
             }
         }
     }
     if(sum < REQUIRED_COLLAGE) {
         fprintf(stderr, "Too few params\n");
         print_help();
+        free(new_filename);
+        free(old_filename);
         return;
     }
     printf("\nNEW\n");
     print_args(argc, argv);
     char* filename = collage_opts.old_filename;
     if(check_file(filename) == false) {
+        free(new_filename);
+        free(old_filename);
         return;
     }
     DIB_Header dibh = parse_dib(filename);

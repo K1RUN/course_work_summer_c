@@ -7,7 +7,7 @@ int parse_commands(int argc, char* argv[]) {
     char* opts = "hi:";
     struct option longOpts[] = {
             {"help", no_argument, &command_flag, HELP},
-            {"file_info", required_argument, &command_flag, FILE_INFO},
+            {"info", required_argument, &command_flag, INFO},
             {"triangle", no_argument, &command_flag, TRIANGLE},
             {"find_rect", no_argument, &command_flag, FIND_RECT},
             {"collage", no_argument, &command_flag, COLLAGE},
@@ -29,9 +29,10 @@ int parse_commands(int argc, char* argv[]) {
     } else {
         switch(command_flag) {
             case HELP: {
-                print_help(); break;
+                print_help();
+                break;
             }
-            case FILE_INFO: {
+            case INFO: {
                 print_info(optarg);
                 break;
             }

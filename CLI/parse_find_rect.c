@@ -23,8 +23,10 @@ void parse_find_rect(int argc, char* argv[]) {
                 char* string = copy_string(optarg); Rgb max_rect_color;
                 if(scan_RGB(string, &max_rect_color) == false) {
                     fprintf(stderr, "Invalid option for max rectangle color %s\n", optarg);
+                    free(string);
                     return;
                 }
+                free(string);
                 findRect.max_rect_color = max_rect_color; sum |= 1;
                 break;
             }
@@ -32,8 +34,10 @@ void parse_find_rect(int argc, char* argv[]) {
                 char* string = copy_string(optarg); Rgb fill_color;
                 if(scan_RGB(string, &fill_color) == false) {
                     fprintf(stderr, "Invalid option for filling color %s\n", optarg);
+                    free(string);
                     return;
                 }
+                free(string);
                 sum |= (1 << 1);
                 findRect.fill_rect_color = fill_color; break;
             }
@@ -60,19 +64,23 @@ void parse_find_rect(int argc, char* argv[]) {
             }
             case '?':
             default: {
-                printf("Unknown %c flag\n", optopt);
+                printf("Unknown flag\n");
             }
         }
     }
     if(sum < REQUIRED_RECTANGLE) {
         fprintf(stderr, "Too few params\n");
         print_help();
+        free(new_filename);
+        free(old_filename);
         return;
     }
     printf("\nNEW\n");
     print_args(argc, argv);
     char* filename = findRect.old_filename;
     if(check_file(filename) == false) {
+        free(new_filename);
+        free(old_filename);
         return;
     }
     DIB_Header dibh = parse_dib(filename);

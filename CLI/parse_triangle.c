@@ -28,7 +28,7 @@ void parse_triangle(int argc, char* argv[]) {
                 char* coords_str = copy_string(optarg);
                 Pixel p;
                 if(scan_coords(coords_str, &p) == false) {
-                    fprintf(stderr, "Invalid option for coordinate %s\n", optarg); free(coords_str);
+                    fprintf(stderr, "Invalid option for 1 coordinate %s\n", optarg); free(coords_str);
                     return;
                 }
                 triangle.a = p;
@@ -39,7 +39,7 @@ void parse_triangle(int argc, char* argv[]) {
                 char* coords_str = copy_string(optarg);
                 Pixel p;
                 if(scan_coords(coords_str, &p) == false) {
-                    fprintf(stderr, "Invalid option for coordinate %s\n", optarg); free(coords_str);
+                    fprintf(stderr, "Invalid option for 2 coordinate %s\n", optarg); free(coords_str);
                     return;
                 }
                 triangle.b = p;
@@ -50,7 +50,7 @@ void parse_triangle(int argc, char* argv[]) {
                 char* coords_str = copy_string(optarg);
                 Pixel p;
                 if(scan_coords(coords_str, &p) == false) {
-                    fprintf(stderr, "Invalid option for coordinate %s\n", optarg); free(coords_str);
+                    fprintf(stderr, "Invalid option for 3 coordinate %s\n", optarg); free(coords_str);
                     return;
                 }
                 triangle.c = p;
@@ -111,7 +111,7 @@ void parse_triangle(int argc, char* argv[]) {
             }
             case '?':
             default: {
-                printf("Unknown %c flag\n", optopt);
+                printf("Unknown flag\n");
             }
         }
     }
@@ -119,6 +119,8 @@ void parse_triangle(int argc, char* argv[]) {
     if(sum < REQUIRED_TRIANGLE) {
         fprintf(stderr, "Too few params\n");
         print_help();
+        free(new_filename);
+        free(old_filename);
         return;
     }
     printf("\nNEW\n");
@@ -126,6 +128,8 @@ void parse_triangle(int argc, char* argv[]) {
     // filename should be last in the input sequence
     char* filename = triangle.old_filename;
     if(check_file(filename) == false) {
+        free(new_filename);
+        free(old_filename);
         return;
     }
     DIB_Header dibh = parse_dib(filename);
