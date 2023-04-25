@@ -107,7 +107,7 @@ bool draw_width_incenter(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3
     Pixel inner_offset2 = get_inner_vertex(proj2, center, thickness);
     Pixel inner_offset3 = get_inner_vertex(proj3, center, thickness);
     // getting normal vectors of each edge (perpendiculars that connect an incenter with it projections on each edge)
-    Vector normal1 = {center.x - proj1.x, center.y - proj1.y}; // problem here x = 0
+    Vector normal1 = {center.x - proj1.x, center.y - proj1.y};
     Vector normal2 = {center.x - proj2.x, center.y - proj2.y};
     Vector normal3 = {center.x - proj3.x, center.y - proj3.y};
     // direct vectors of the inner triangle edges (actually they are perpendicular to previous normals)

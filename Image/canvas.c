@@ -34,7 +34,7 @@ void canvas_draw(Pixels canvas, char *filename) {
     for(unsigned int i = canvas.h; i != 0; i--){
         // scansets come in reverse order by default, so reading it inverse
         if (fread(canvas.matrix[i - 1], 1, canvas.w*sizeof(Rgb), fp) != canvas.w * sizeof(Rgb)) {
-            process_error(FREAD_ERR);
+            fprintf(stderr, "Error while reading scanlines from a file\n");
             return;
         }
         fseek(fp, offset, SEEK_CUR);

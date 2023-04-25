@@ -1,7 +1,7 @@
 "██████  ███    ███ ██████  ██████  \n"
 "██   ██ ████  ████ ██   ██ ██   ██      commandline BMP processor [version -1.0]\n"
 "██████  ██ ████ ██ ██████  ██████  \n"
-"██   ██ ██  ██  ██ ██      ██           Usage:      bmpp [options] <file>.bmp\n"
+"██   ██ ██  ██  ██ ██      ██           Usage:      bmpp [options] --file <file>.bmp\n"
 "██████  ██      ██ ██      ██      \n"
 "\n"
 "Options:\n"

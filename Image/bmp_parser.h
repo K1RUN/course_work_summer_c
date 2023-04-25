@@ -2,7 +2,6 @@
 #define MY_BMP_PARSER_H
 #include <stdbool.h>
 #include <stdio.h>
-#include "../Error_handling/error_handler.h"
 
 #pragma pack(push, 1)
 typedef struct {

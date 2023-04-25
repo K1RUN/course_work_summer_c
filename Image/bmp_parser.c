@@ -25,7 +25,7 @@ void print_dib_header(DIB_Header bitmap) {
 bool open_bmp(char* filename, char* mode) {
     FILE* fp = fopen(filename, mode);
     if(fp == NULL) {
-        process_error(FOPEN_ERR);
+        fprintf(stderr, "Failed while opening the bmp file\n");
         return false;
     }
     fclose(fp);
@@ -59,6 +59,7 @@ unsigned short get_offset(size_t width) {
 
 Bitmap_File_Header parse_bmfh(char* filename) {
     Bitmap_File_Header bmfh;
+    bmfh.signature = 0;
     if(!open_bmp(filename, "rb")) return bmfh;
     FILE *fp = fopen(filename, "rb");
     fread(&bmfh, 1, sizeof(Bitmap_File_Header), fp);
@@ -68,6 +69,7 @@ Bitmap_File_Header parse_bmfh(char* filename) {
 
 DIB_Header parse_dib(char* filename) {
     DIB_Header dibh;
+    dibh.dib_header_size = 0;
     if(!open_bmp(filename, "rb")) return dibh;
     FILE *fp = fopen(filename, "rb");
     fseek(fp, sizeof(Bitmap_File_Header), SEEK_SET);
@@ -83,6 +85,10 @@ void print_info(char* filename) {
     }
     printf("FILE INFO\n");
     Bitmap_File_Header bmfh = parse_bmfh(filename);
+    if(bmfh.signature != 0x4d42) {
+        fprintf(stderr, "This file is not in a bmp format\n");
+        return;
+    }
     DIB_Header dibh = parse_dib(filename);
     print_file_header(bmfh);
     print_dib_header(dibh);

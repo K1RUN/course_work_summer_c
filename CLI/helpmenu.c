@@ -1,14 +1,14 @@
 #include "helpmenu.h"
 
 const char* helpmenu =  "██████  ███    ███ ██████  ██████  \n"
-                        "██   ██ ████  ████ ██   ██ ██   ██      commandline BMP processor [version -1.0]\n"
+                        "██   ██ ████  ████ ██   ██ ██   ██         commandline BMP processor [version -1.0]\n"
                         "██████  ██ ████ ██ ██████  ██████  \n"
-                        "██   ██ ██  ██  ██ ██      ██           Usage:      bmpp [options] --file <filename>.bmp\n"
+                        "██   ██ ██  ██  ██ ██      ██              Usage: bmpp [options] --file <filename>.bmp\n"
                         "██████  ██      ██ ██      ██      \n"
                         "\n"
                         "Options:\n"
                         "            -h, --help                     print this guide\n"
-                        "            -i, --file_info                print BMP file information\n"
+                        "            -i, --info <file.bmp>          print BMP file information\n"
                         "\n"
                         "            --triangle [options]\n"
                         "                -a, --vertex1 x,y          set the coordinates of the first vertex\n"
@@ -25,8 +25,8 @@ const char* helpmenu =  "██████  ███    ███ ████
                         "                -n, --new_file <file>.bmp  saves processed image to a new file (optional)\n"
                         "\n"
                         "            --collage [options]\n"
-                        "                -x, --x_num number       the number of the images by x-axis\n"
-                        "                -y, --y_num number       the number of the images by y-axis\n"
+                        "                -x, --x_num number         the number of the images by x-axis\n"
+                        "                -y, --y_num number         the number of the images by y-axis\n"
                         "                -n, --new_file <file>.bmp  saves processed image to a new file (optional)\n"
                         "\n";
 
