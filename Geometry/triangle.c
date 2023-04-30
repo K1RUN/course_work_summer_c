@@ -9,11 +9,75 @@ bool is_in_triangle(Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel point) {
     int vect_mul1 = k * ((vertex2.y - vertex1.y) * (point.x - vertex1.x) - (vertex2.x - vertex1.x) * (point.y - vertex1.y));
     int vect_mul2 = k * ((vertex3.x - vertex1.x) * (point.y - vertex1.y) - (vertex3.y - vertex1.y) * (point.x - vertex1.x));
     int vect_mul3 = k * ((vertex3.y - vertex2.y) * (point.x - vertex2.x) - (vertex3.x - vertex2.x) * (point.y - vertex2.y));
-    if(vect_mul1 > 0 && vect_mul2 > 0 && vect_mul3 > 0) {
+    if(vect_mul1 >= 0 && vect_mul2 >= 0 && vect_mul3 >= 0) {
         return true;
     } else {
         return false;
     }
+}
+
+void draw_edge(Pixels img, Pixel p1, Pixel p2, Pixel p3, Rgb color, unsigned int thickness) {
+    if(thickness > 0) {
+        Rectangle rect;
+        Pixel n1, n2, n3, n4;
+        if(p1.y > p2.y) {
+            Pixel tmp;
+            tmp = p1; p1 = p2; p2 = tmp;
+        }
+        line_coords coords1 = Perpendicular(p1, p2, thickness);
+        line_coords coords2 = Perpendicular(p2, p1, thickness);
+        n1.x = coords1.x1; n1.y = coords1.y1;
+        n2.x = coords1.x2; n2.y = coords1.y2;
+        n3.x = coords2.x1; n3.y = coords2.y1;
+        n4.x = coords2.x2; n4.y = coords2.y2;
+        // if line is parallel with one of the axis
+        if(p1.x == p2.x || p1.y == p2.y) {
+            rect.v1 = n1; rect.v2 = n4;
+            int x_min = min(rect.v1.x, rect.v2.x); int x_max = max(rect.v1.x, rect.v2.x);
+            int y_min = min(rect.v1.y, rect.v2.y); int y_max = max(rect.v1.y, rect.v2.y);
+            for(int i = y_min; i <= y_max; i++) {
+                for(int j = x_min; j <= x_max; j++) {
+                    Pixel p = {j, i, color};
+                    if (is_in_triangle(p1, p2, p3, p) == true) {
+                        set_pixel(img, p);
+                    }
+                }
+            }
+            return;
+        }
+        Rectangle bound = Boundary_rect(n1, n2, n3, n4);
+        Pixel tmp; tmp.color.r = 120;
+        Pixel top_1 = {bound.v2.x, bound.v1.y, 255, 255, 0};
+        Pixel top_2 = {bound.v1.x, bound.v1.y, 255, 255, 0};
+        Pixel bottom_1 = {bound.v1.x, bound.v2.y, 255, 255, 0};
+        Pixel bottom_2 = {bound.v2.x, bound.v2.y, 255, 255, 0};
+        if(abs(top_1.x - p1.x) > abs(top_2.x - p1.x)) {
+            tmp = top_1; top_1 = top_2; top_2 = tmp;
+        }
+        if(abs(bottom_1.x - p2.x) > abs(bottom_2.x - p2.x)) {
+            tmp = bottom_1; bottom_1 = bottom_2; bottom_2 = tmp;
+        }
+        tmp.color = color;
+        for(int i = bound.v1.y; i <= bound.v2.y; i++) {
+            tmp.y = i;
+            for(int j = bound.v1.x; j <= bound.v2.x; j++) {
+                tmp.x = j;
+                if(is_in_triangle(top_1, n1, n2, tmp) == false &&
+                   is_in_triangle(bottom_1, n3, n4, tmp) == false &&
+                   is_in_triangle(top_2, n1, n4, tmp) == false &&
+                   is_in_triangle(bottom_2, n2, n3, tmp) == false &&
+                   is_in_triangle(p1, p2, p3, tmp) == true) {
+                        set_pixel(img, tmp);
+                }
+            }
+        }
+    }
+}
+
+void draw_thick_edges(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, Rgb color, unsigned thickness){
+    draw_edge(img, vertex1, vertex2, vertex3, color, thickness);
+    draw_edge(img, vertex2, vertex3, vertex1, color, thickness);
+    draw_edge(img, vertex1, vertex3, vertex2, color, thickness);
 }
 
 Pixel center_of_mass(Pixel vertex1, Pixel vertex2, Pixel vertex3) {
@@ -245,10 +309,9 @@ void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, int 
         fprintf(stderr, "wrong thickness value was given");
         return;
     }
-    if(thickness != 1 && draw_width_incenter(img, vertex1, vertex2, vertex3, thickness) == false){
-        draw_width_center_mass(img, vertex1, vertex2, vertex3, thickness);
-    }
-    if(thickness == 1) {
-        draw_outer_triangle(img, vertex1, vertex2, vertex3);
+    draw_outer_triangle(img, vertex1, vertex2, vertex3);
+    if(thickness != 1){
+
+        draw_thick_edges(img, vertex1, vertex2, vertex3, line_color, thickness);
     }
 }
