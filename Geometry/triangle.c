@@ -311,7 +311,6 @@ void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, int 
     }
     draw_outer_triangle(img, vertex1, vertex2, vertex3);
     if(thickness != 1){
-
         draw_thick_edges(img, vertex1, vertex2, vertex3, line_color, thickness);
     }
 }

@@ -16,7 +16,7 @@ typedef struct {
     Pixel v2;
 } Rectangle;
 
-
+void fill_rect(Pixels img, Rectangle rect, Rgb color);
 bool is_in_triangle(Pixel vertex1, Pixel vertex2, Pixel vertex3, Pixel point);
 void Bresenham(Pixels img, Pixel point1, Pixel point2);
 Pixel line_intercept(Vector direct1, Pixel point1, Vector direct2, Pixel point2);
