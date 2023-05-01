@@ -112,7 +112,6 @@ void plotLineWidth(Pixels img, Pixel point1, Pixel point2, float wd) {
 line_coords Perpendicular(Pixel point1, Pixel point2, unsigned int len) {
     // algorithm property: line approximation depends on the order of the argument points
     line_coords coords;
-    Pixel point1_cpy = point1;
     int x1 = (int)point1.x;
     int x1_ = (int)point1.x;
     int x2 = (int)point2.x;
@@ -194,7 +193,7 @@ void draw_thick_line(Pixels img, Pixel p1, Pixel p2, Rgb color, unsigned int thi
             return;
         }
         Rectangle bound = Boundary_rect(n1, n2, n3, n4);
-        Pixel tmp; tmp.color.r = 120;
+        Pixel tmp;
         Pixel top_1 = {bound.v2.x, bound.v1.y, 255, 255, 0};
         Pixel top_2 = {bound.v1.x, bound.v1.y, 255, 255, 0};
         Pixel bottom_1 = {bound.v1.x, bound.v2.y, 255, 255, 0};

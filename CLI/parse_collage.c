@@ -46,6 +46,7 @@ void parse_collage(int argc, char* argv[]) {
                 new_filename = copy_string(optarg);
                 if(new_filename == NULL) {
                     fprintf(stderr, "Invalid option for a new file name\n");
+                    free(old_filename);
                     return;
                 }
                 collage_opts.new_filename = new_filename;
