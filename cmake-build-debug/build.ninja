@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: my
+# Project: bmpp
 # Configurations: Debug
 # =============================================================================
 
@@ -39,135 +39,168 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /home/samsepi/Documents/code/C/course_work/spring/my/cmake-build-debug/
+cmake_ninja_workdir = /home/samsepi/Documents/code/C/course_work/spring/src/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target my
+# Object build statements for EXECUTABLE target bmpp
 
 
 #############################################
-# Order-only phony target for my
+# Order-only phony target for bmpp
 
-build cmake_object_order_depends_target_my: phony || CMakeFiles/my.dir
+build cmake_object_order_depends_target_bmpp: phony || CMakeFiles/bmpp.dir
 
-build CMakeFiles/my.dir/main.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/main.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/main.c.o.d
+build CMakeFiles/bmpp.dir/main.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/main.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/main.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/CLI/helpmenu.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/CLI/helpmenu.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/CLI/helpmenu.c.o.d
+build CMakeFiles/bmpp.dir/CLI/helpmenu.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/CLI/helpmenu.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/CLI/helpmenu.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/CLI
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/CLI
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/Error_handling/log.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/Error_handling/log.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/Error_handling/log.c.o.d
+build CMakeFiles/bmpp.dir/Image/bmp_parser.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/Image/bmp_parser.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/Image/bmp_parser.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/Error_handling
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/Image
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/Error_handling/error_handler.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/Error_handling/error_handler.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/Error_handling/error_handler.c.o.d
+build CMakeFiles/bmpp.dir/Geometry/line_draw.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/Geometry/line_draw.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/Geometry/line_draw.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/Error_handling
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/Geometry
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/Image/bmp_parser.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/Image/bmp_parser.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/Image/bmp_parser.c.o.d
+build CMakeFiles/bmpp.dir/Geometry/general.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/Geometry/general.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/Geometry/general.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/Image
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/Geometry
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/Geometry/line_draw.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/Geometry/line_draw.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/Geometry/line_draw.c.o.d
+build CMakeFiles/bmpp.dir/Geometry/triangle.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/Geometry/triangle.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/Geometry/triangle.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/Geometry
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/Geometry
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/Geometry/general.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/Geometry/general.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/Geometry/general.c.o.d
+build CMakeFiles/bmpp.dir/CLI/command_parser.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/CLI/command_parser.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/CLI/command_parser.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/Geometry
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/CLI
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/Geometry/triangle.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/Geometry/triangle.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/Geometry/triangle.c.o.d
+build CMakeFiles/bmpp.dir/Stack/stack.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/Stack/stack.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/Stack/stack.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/Geometry
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/Stack
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/CLI/command_parser.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/CLI/command_parser.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/CLI/command_parser.c.o.d
+build CMakeFiles/bmpp.dir/Geometry/find_max_rect.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/Geometry/find_max_rect.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/Geometry/find_max_rect.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/CLI
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/Geometry
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/Stack/stack.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/Stack/stack.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/Stack/stack.c.o.d
+build CMakeFiles/bmpp.dir/Geometry/rectangle.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/Geometry/rectangle.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/Geometry/rectangle.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/Stack
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/Geometry
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/Geometry/find_max_rect.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/Geometry/find_max_rect.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/Geometry/find_max_rect.c.o.d
+build CMakeFiles/bmpp.dir/Image/canvas.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/Image/canvas.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/Image/canvas.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/Geometry
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/Image
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/Geometry/rectangle.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/Geometry/rectangle.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/Geometry/rectangle.c.o.d
+build CMakeFiles/bmpp.dir/Image/collage.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/Image/collage.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/Image/collage.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/Geometry
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/Image
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/Image/canvas.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/Image/canvas.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/Image/canvas.c.o.d
+build CMakeFiles/bmpp.dir/CLI/parse_triangle.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/CLI/parse_triangle.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/CLI/parse_triangle.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/Image
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/CLI
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/Image/collage.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/Image/collage.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/Image/collage.c.o.d
+build CMakeFiles/bmpp.dir/CLI/commands.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/CLI/commands.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/CLI/commands.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/Image
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/CLI
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/CLI/parse_triangle.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/CLI/parse_triangle.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/CLI/parse_triangle.c.o.d
+build CMakeFiles/bmpp.dir/CLI/parse_find_rect.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/CLI/parse_find_rect.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/CLI/parse_find_rect.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/CLI
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/CLI
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
-build CMakeFiles/my.dir/CLI/commands.c.o: C_COMPILER__my_Debug /home/samsepi/Documents/code/C/course_work/spring/my/CLI/commands.c || cmake_object_order_depends_target_my
-  DEP_FILE = CMakeFiles/my.dir/CLI/commands.c.o.d
+build CMakeFiles/bmpp.dir/CLI/parse_collage.c.o: C_COMPILER__bmpp_Debug /home/samsepi/Documents/code/C/course_work/spring/src/CLI/parse_collage.c || cmake_object_order_depends_target_bmpp
+  DEP_FILE = CMakeFiles/bmpp.dir/CLI/parse_collage.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/my.dir
-  OBJECT_FILE_DIR = CMakeFiles/my.dir/CLI
+  OBJECT_DIR = CMakeFiles/bmpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/bmpp.dir/CLI
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_PDB = bmpp.pdb
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target my
+# Link build statements for EXECUTABLE target bmpp
 
 
 #############################################
-# Link the executable my
+# Link the executable bmpp
 
-build my: C_EXECUTABLE_LINKER__my_Debug CMakeFiles/my.dir/main.c.o CMakeFiles/my.dir/CLI/helpmenu.c.o CMakeFiles/my.dir/Error_handling/log.c.o CMakeFiles/my.dir/Error_handling/error_handler.c.o CMakeFiles/my.dir/Image/bmp_parser.c.o CMakeFiles/my.dir/Geometry/line_draw.c.o CMakeFiles/my.dir/Geometry/general.c.o CMakeFiles/my.dir/Geometry/triangle.c.o CMakeFiles/my.dir/CLI/command_parser.c.o CMakeFiles/my.dir/Stack/stack.c.o CMakeFiles/my.dir/Geometry/find_max_rect.c.o CMakeFiles/my.dir/Geometry/rectangle.c.o CMakeFiles/my.dir/Image/canvas.c.o CMakeFiles/my.dir/Image/collage.c.o CMakeFiles/my.dir/CLI/parse_triangle.c.o CMakeFiles/my.dir/CLI/commands.c.o
+build bmpp: C_EXECUTABLE_LINKER__bmpp_Debug CMakeFiles/bmpp.dir/main.c.o CMakeFiles/bmpp.dir/CLI/helpmenu.c.o CMakeFiles/bmpp.dir/Image/bmp_parser.c.o CMakeFiles/bmpp.dir/Geometry/line_draw.c.o CMakeFiles/bmpp.dir/Geometry/general.c.o CMakeFiles/bmpp.dir/Geometry/triangle.c.o CMakeFiles/bmpp.dir/CLI/command_parser.c.o CMakeFiles/bmpp.dir/Stack/stack.c.o CMakeFiles/bmpp.dir/Geometry/find_max_rect.c.o CMakeFiles/bmpp.dir/Geometry/rectangle.c.o CMakeFiles/bmpp.dir/Image/canvas.c.o CMakeFiles/bmpp.dir/Image/collage.c.o CMakeFiles/bmpp.dir/CLI/parse_triangle.c.o CMakeFiles/bmpp.dir/CLI/commands.c.o CMakeFiles/bmpp.dir/CLI/parse_find_rect.c.o CMakeFiles/bmpp.dir/CLI/parse_collage.c.o
   FLAGS = -g
   LINK_LIBRARIES = -lm
-  OBJECT_DIR = CMakeFiles/my.dir
+  OBJECT_DIR = CMakeFiles/bmpp.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = my
-  TARGET_PDB = my.dbg
+  TARGET_COMPILE_PDB = CMakeFiles/bmpp.dir/
+  TARGET_FILE = bmpp
+  TARGET_PDB = bmpp.pdb
 
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/samsepi/Documents/code/C/course_work/spring/my/cmake-build-debug && /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/samsepi/Documents/code/C/course_work/spring/src/cmake-build-debug && /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -178,7 +211,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/samsepi/Documents/code/C/course_work/spring/my/cmake-build-debug && /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/samsepi/Documents/code/C/course_work/spring/my -B/home/samsepi/Documents/code/C/course_work/spring/my/cmake-build-debug
+  COMMAND = cd /home/samsepi/Documents/code/C/course_work/spring/src/cmake-build-debug && /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/samsepi/Documents/code/C/course_work/spring/src -B/home/samsepi/Documents/code/C/course_work/spring/src/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -194,9 +227,9 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 
 #############################################
-# Folder: /home/samsepi/Documents/code/C/course_work/spring/my/cmake-build-debug
+# Folder: /home/samsepi/Documents/code/C/course_work/spring/src/cmake-build-debug
 
-build all: phony my
+build all: phony bmpp
 
 # =============================================================================
 # Built-in targets
@@ -205,14 +238,14 @@ build all: phony my
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCInformation.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU-C.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/UnixPaths.cmake /home/samsepi/Documents/code/C/course_work/spring/my/CMakeLists.txt CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCCompiler.cmake.in /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCCompilerABI.c /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCInformation.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCompilerIdDetection.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDetermineCCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDetermineCompileFeatures.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDetermineCompilerABI.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDetermineCompilerId.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDetermineSystem.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeFindBinUtils.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeParseImplicitIncludeInfo.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeParseImplicitLinkInfo.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeParseLibraryArchitecture.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystem.cmake.in /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeTestCCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeTestCompilerCommon.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/ADSP-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/ARMCC-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/ARMClang-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/AppleClang-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Borland-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Cray-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GHS-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-FindBinUtils.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/HP-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/IAR-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Intel-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/LCC-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/MSVC-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/NVHPC-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/PGI-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/PathScale-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/SCO-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/TI-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Watcom-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/XL-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/zOS-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Internal/FeatureTesting.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU-C.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/UnixPaths.cmake /home/samsepi/Documents/code/C/course_work/spring/src/CMakeLists.txt CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCInformation.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU-C.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/UnixPaths.cmake /home/samsepi/Documents/code/C/course_work/spring/my/CMakeLists.txt CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake: phony
+build /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCCompiler.cmake.in /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCCompilerABI.c /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCInformation.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCompilerIdDetection.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDetermineCCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDetermineCompileFeatures.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDetermineCompilerABI.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDetermineCompilerId.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDetermineSystem.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeFindBinUtils.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeParseImplicitIncludeInfo.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeParseImplicitLinkInfo.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeParseLibraryArchitecture.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystem.cmake.in /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeTestCCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeTestCompilerCommon.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/ADSP-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/ARMCC-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/ARMClang-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/AppleClang-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Borland-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Cray-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GHS-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-FindBinUtils.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/HP-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/IAR-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Intel-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/LCC-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/MSVC-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/NVHPC-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/PGI-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/PathScale-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/SCO-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/TI-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/Watcom-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/XL-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/zOS-C-DetermineCompiler.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Internal/FeatureTesting.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU-C.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux.cmake /home/samsepi/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/UnixPaths.cmake /home/samsepi/Documents/code/C/course_work/spring/src/CMakeLists.txt CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake: phony
 
 
 #############################################
