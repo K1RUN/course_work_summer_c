@@ -92,8 +92,8 @@ void parse_triangle(int argc, char* argv[]) {
                 new_filename = copy_string(optarg);
                 if(new_filename == NULL) {
                     fprintf(stderr, "Invalid option for a new file name\n");
-                    // dropping sum just to avoid losing original file
-                    break;
+                    free(old_filename);
+                    return;
                 }
                 triangle.new_filename = new_filename;
                 create_new_file = true;

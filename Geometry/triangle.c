@@ -178,7 +178,7 @@ bool draw_width_incenter(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3
     Vector direct1 = {-normal1.y, normal1.x};
     Vector direct2 = {-normal2.y, normal2.x};
     Vector direct3 = {-normal3.y, normal3.x};
-    // calculating vertices of the inner triangle (they are intercept of each edge) // TODO
+    // calculating vertices of the inner triangle (they are intercept of each edge)
     // WARNING https://www.desmos.com/calculator/2iiwgyekaf
     Pixel inner_vert1 = line_intercept(direct1, inner_offset1, direct2, inner_offset2);
     Pixel inner_vert2 = line_intercept(direct1, inner_offset1, direct3, inner_offset3);
