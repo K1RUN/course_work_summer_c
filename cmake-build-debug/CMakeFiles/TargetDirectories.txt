@@ -1,3 +1,0 @@
-/home/samsepi/Documents/code/C/course_work/spring/src/cmake-build-debug/CMakeFiles/bmpp.dir
-/home/samsepi/Documents/code/C/course_work/spring/src/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/samsepi/Documents/code/C/course_work/spring/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
