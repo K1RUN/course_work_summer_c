@@ -9,7 +9,6 @@ void parse_triangle(int argc, char* argv[]) {
     bool to_fill = false; bool create_new_file = false;
     char* old_filename = NULL;
     char* new_filename = NULL;
-    print_args(argc, argv);
     opterr = 0;
     struct option longOpts[] = {
             {"vertex1", required_argument, 0, 'a'},
@@ -123,8 +122,6 @@ void parse_triangle(int argc, char* argv[]) {
         free(old_filename);
         return;
     }
-    printf("\nNEW\n");
-    print_args(argc, argv);
     // filename should be last in the input sequence
     char* filename = triangle.old_filename;
     if(check_file(filename) == false) {

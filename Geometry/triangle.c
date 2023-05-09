@@ -47,10 +47,10 @@ void draw_edge(Pixels img, Pixel p1, Pixel p2, Pixel p3, Rgb color, unsigned int
         }
         Rectangle bound = Boundary_rect(n1, n2, n3, n4);
         Pixel tmp; tmp.color.r = 120;
-        Pixel top_1 = {bound.v2.x, bound.v1.y, 255, 255, 0};
-        Pixel top_2 = {bound.v1.x, bound.v1.y, 255, 255, 0};
-        Pixel bottom_1 = {bound.v1.x, bound.v2.y, 255, 255, 0};
-        Pixel bottom_2 = {bound.v2.x, bound.v2.y, 255, 255, 0};
+        Pixel top_1 = {bound.v2.x, bound.v1.y, {255, 255, 0}};
+        Pixel top_2 = {bound.v1.x, bound.v1.y, {255, 255, 0}};
+        Pixel bottom_1 = {bound.v1.x, bound.v2.y, {255, 255, 0}};
+        Pixel bottom_2 = {bound.v2.x, bound.v2.y, {255, 255, 0}};
         if(abs(top_1.x - p1.x) > abs(top_2.x - p1.x)) {
             tmp = top_1; top_1 = top_2; top_2 = tmp;
         }
@@ -291,7 +291,7 @@ void draw_outer_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3
 }
 
 void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, int thickness, Rgb line_color, bool fill, Rgb fill_color) {
-    if(vertex1.x == vertex2.x && vertex1.x == vertex3.x || vertex1.y == vertex2.y && vertex1.y == vertex3.y) {
+    if((vertex1.x == vertex2.x && vertex1.x == vertex3.x) || (vertex1.y == vertex2.y && vertex1.y == vertex3.y)) {
         fprintf(stderr, "Wrong pixels");
         return;
     }
@@ -306,7 +306,7 @@ void draw_triangle(Pixels img, Pixel vertex1, Pixel vertex2, Pixel vertex3, int 
         fill_triangle(img, vertex1, vertex2, vertex3, p);
     }
     if(thickness <= 0) {
-        fprintf(stderr, "wrong thickness value was given");
+        fprintf(stderr, "Wrong thickness value was given\n");
         return;
     }
     draw_outer_triangle(img, vertex1, vertex2, vertex3);

@@ -37,7 +37,7 @@ Pixel line_intercept(Vector direct1, Pixel point1, Vector direct2, Pixel point2)
     float y1 = (float)point1.y; float x1 = (float)point1.x;
     float y2 = (float)point2.y; float x2 = (float)point2.x;
     // situation where line is parallel to oX axis or oY axis
-    if (direct1.x == 0 && direct2.x == 0 || direct2.y == 0 && direct1.y == 0) {
+    if ((direct1.x == 0 && direct2.x == 0) || (direct2.y == 0 && direct1.y == 0)) {
         intercept.x = -1; intercept.y = -1;
         return intercept;
     }
@@ -72,44 +72,8 @@ Pixel line_intercept(Vector direct1, Pixel point1, Vector direct2, Pixel point2)
     return intercept;
 }
 
-void plotLineWidth(Pixels img, Pixel point1, Pixel point2, float wd) {
-    int x0 = point1.x; int y0 = point1.y;
-    int x1 = point2.x; int y1 = point2.y;
-    int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
-    int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
-    int err = dx - dy, e2, x2, y2;                          /* error value e_xy */
-    float ed = dx + dy == 0 ? 1 : sqrt((float) dx * dx + (float) dy * dy);
-    for (wd = (wd + 1) / 2;;) {                                   /* pixel loop */
-        point1.x = x0;
-        point1.y = y0;
-        set_pixel(img, point1);
-        e2 = err;
-        x2 = x0;
-        if (2 * e2 >= -dx) {                                           /* x step */
-            for (e2 += dy, y2 = y0; e2 < ed * wd && (y1 != y2 || dx > dy); e2 += dx) {
-                point1.x = x0;
-                point1.y = (y2 += sy);
-                set_pixel(img, point2);
-            }
-            if (x0 == x1) break;
-            e2 = err;
-            err -= dy;
-            x0 += sx;
-        }
-        if (2 * e2 <= dy) {                                            /* y step */
-            for (e2 = dx - e2; e2 < ed * wd && (x1 != x2 || dx < dy); e2 += dy) {
-                point1.x = (x2 += sx);
-                point1.y = y0;
-                set_pixel(img, point1);
-            }
-            if (y0 == y1) break;
-            err += dx;
-            y0 += sy;
-        }
-    }
-}
-
 line_coords Perpendicular(Pixel point1, Pixel point2, unsigned int len) {
+    // http://kt8216.unixcab.org/murphy/index.html
     // algorithm property: line approximation depends on the order of the argument points
     line_coords coords;
     int x1 = (int)point1.x;
@@ -139,7 +103,6 @@ line_coords Perpendicular(Pixel point1, Pixel point2, unsigned int len) {
             x1_ -= signX;
         }
     }
-    // sorting vertices (just because it is convenient to use)
     coords.y1 = y1;
     coords.y2 = y1_;
     coords.x1 = x1;
@@ -194,10 +157,10 @@ void draw_thick_line(Pixels img, Pixel p1, Pixel p2, Rgb color, unsigned int thi
         }
         Rectangle bound = Boundary_rect(n1, n2, n3, n4);
         Pixel tmp;
-        Pixel top_1 = {bound.v2.x, bound.v1.y, 255, 255, 0};
-        Pixel top_2 = {bound.v1.x, bound.v1.y, 255, 255, 0};
-        Pixel bottom_1 = {bound.v1.x, bound.v2.y, 255, 255, 0};
-        Pixel bottom_2 = {bound.v2.x, bound.v2.y, 255, 255, 0};
+        Pixel top_1 = {bound.v2.x, bound.v1.y, {255, 255, 0}};
+        Pixel top_2 = {bound.v1.x, bound.v1.y, {255, 255, 0}};
+        Pixel bottom_1 = {bound.v1.x, bound.v2.y, {255, 255, 0}};
+        Pixel bottom_2 = {bound.v2.x, bound.v2.y, {255, 255, 0}};
         if(abs(top_1.x - p1.x) > abs(top_2.x - p1.x)) {
             tmp = top_1; top_1 = top_2; top_2 = tmp;
         }

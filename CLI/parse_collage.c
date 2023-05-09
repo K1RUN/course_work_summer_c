@@ -8,7 +8,6 @@ void parse_collage(int argc, char* argv[]) {
     int sum = 0;
     int opt;
     char* old_filename = NULL; char* new_filename = NULL;
-    print_args(argc, argv);
     opterr = 0;
     struct option longOpts[] = {
             {"x_num", required_argument, 0, 'x'},
@@ -76,8 +75,6 @@ void parse_collage(int argc, char* argv[]) {
         free(old_filename);
         return;
     }
-    printf("\nNEW\n");
-    print_args(argc, argv);
     char* filename = collage_opts.old_filename;
     if(check_file(filename) == false) {
         free(new_filename);

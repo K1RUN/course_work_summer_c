@@ -24,7 +24,7 @@ void free_canvas(Pixels canvas) {
 }
 
 void canvas_draw(Pixels canvas, char *filename) {
-    if(!open_bmp(filename, "rb")) return;
+    if(!open_bmp(filename, "rb") || canvas.matrix == NULL) return;
     FILE *fp = fopen(filename, "rb");
     Bitmap_File_Header bmfh;
     bmfh = parse_bmfh(filename);
@@ -43,6 +43,9 @@ void canvas_draw(Pixels canvas, char *filename) {
 }
 
 void canvas_write(Pixels canvas, char *filename_old, char *filename_new) {
+    if(canvas.matrix == NULL) {
+        return;
+    }
     Bitmap_File_Header bmfh; DIB_Header dibh;
     bmfh = parse_bmfh(filename_old);
     dibh = parse_dib(filename_old);
@@ -68,4 +71,92 @@ void canvas_write(Pixels canvas, char *filename_old, char *filename_new) {
     }
     fclose(fout);
     free(garbage);
+}
+
+Pixels canvas_copy(Pixels img, Pixel start, Pixel end) {
+    if(img.matrix == NULL || in_area(start, img.h, img.w) == false ||
+        in_area(end, img.h, img.w) == false) {
+        fprintf(stderr, "Invalid image or coordinates for copy were given\n");
+        return (Pixels){};
+    }
+    Pixel min; min.x = min(start.x, end.x); min.y = min(start.y, end.y);
+    Pixel max; max.x = max(start.x, end.x); max.y = max(start.y, end.y);
+    Pixels canvas_cpy = create_canvas(max.y - min.y, max.x - min.x);
+    for(size_t i = min.y; i < max.y; i++) {
+        for(size_t j = min.x; j < max.x; j++) {
+            Pixel p = {j - min.x, i - min.y, img.matrix[i][j]};
+            set_pixel(canvas_cpy, p);
+        }
+    }
+    return canvas_cpy;
+}
+
+bool canvas_paste(Pixels img_dest, Pixels canvas_cpy, Pixel start) {
+    if(img_dest.matrix == NULL || canvas_cpy.matrix == NULL) {
+        return false;
+    }
+    for(size_t i = start.y; i < canvas_cpy.h + start.y; i++) {
+        for(size_t j = start.x; j < canvas_cpy.w + start.x; j++) {
+            if(i >= 0 && j >= 0 && i < img_dest.h && j < img_dest.w) {
+                Pixel p = {j, i, canvas_cpy.matrix[i - start.y][j - start.x]};
+                set_pixel(img_dest, p);
+            }
+        }
+    }
+    return true;
+}
+
+void img_rotate(Pixels img, Pixel start, Pixel end, int angle) {
+    if(img.matrix == NULL || in_area(start, img.h, img.w) == false ||
+       in_area(end, img.h, img.w) == false) {
+        fprintf(stderr, "Invalid image or coordinates for rotate were given\n");
+        return;
+    }
+    angle = angle % 360;
+    Pixels area = canvas_copy(img, start, end);
+    Pixel min; min.x = min(start.x, end.x); min.y = min(start.y, end.y);
+    Pixel max; max.x = max(start.x, end.x); max.y = max(start.y, end.y);
+    Pixel center; center.x = (max.x - min.x) / 2; center.y = (max.y - min.y) / 2;
+    const int rotate_90[4] = {0, -1, 1, 0};
+    const int rotate_180[4] = {-1, 0, 0, -1};
+    const int rotate_270[4] = {0, 1, -1, 0};
+    switch(angle) {
+        case 90: {
+            for (size_t i = min.y; i < max.y; i++) {
+                for (size_t j = min.x; j < max.x; j++) {
+                    size_t new_x = (j - center.x) * rotate_90[0] + (i - center.y) * rotate_90[1] + center.x;
+                    size_t new_y = (j - center.x) * rotate_90[2] + (i - center.y) * rotate_90[3] + center.y;
+                    Pixel p = {new_x, new_y, area.matrix[i - min.y][j - min.x]};
+                    set_pixel(img, p);
+                }
+            }
+            break;
+        }
+        case 180: {
+            for(size_t i = min.y; i < max.y; i++) {
+                for(size_t j = min.x; j < max.x; j++) {
+                    size_t new_x = (j - center.x) * rotate_180[0] + (i - center.y) * rotate_180[1] + center.x;
+                    size_t new_y = (j - center.x) * rotate_180[2] + (i - center.y) * rotate_180[3] + center.y;
+                    Pixel p = {new_x, new_y, area.matrix[i - min.y][j - min.x]};
+                    set_pixel(img, p);
+                }
+            }
+            break;
+        }
+        case 270: {
+            for(size_t i = min.y; i < max.y; i++) {
+                for(size_t j = min.x; j < max.x; j++) {
+                    size_t new_x = (j - center.x) * rotate_270[0] + (i - center.y) * rotate_270[1] + center.x;
+                    size_t new_y = (j - center.x) * rotate_270[2] + (i - center.y) * rotate_270[3] + center.y;
+                    Pixel p = {new_x, new_y, area.matrix[i - min.y][j - min.x]};
+                    set_pixel(img, p);
+                }
+            }
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+    free_canvas(area);
 }

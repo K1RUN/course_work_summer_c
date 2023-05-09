@@ -1,7 +1,7 @@
 #include "general.h"
 
 bool in_area(Pixel point, size_t height, size_t width) {
-    if(point.y < height && point.x < width){
+    if(point.y < height && point.x < width && point.x >= 0 && point.y >= 0){
         return true;
     }
     return false;

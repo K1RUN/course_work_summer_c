@@ -48,11 +48,7 @@ int parse_commands(int argc, char* argv[]) {
                 parse_collage(argc, argv);
                 break;
             }
-            case UNKNOWN:
-            default: {
-                printf("????");
-                break;
-            }
+            default: print_help();
         }
     }
     printf(ANSI_COLOR_RESET);
