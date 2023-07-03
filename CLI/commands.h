@@ -6,7 +6,7 @@
 #include <string.h>
 #include "../Image/bmp_structs.h"
 typedef enum primary_commands {
-    UNKNOWN, TRIANGLE, FIND_RECT, COLLAGE, HELP, INFO
+    UNKNOWN, TRIANGLE, FIND_RECT, COLLAGE, HELP, INFO, FILL
 } primary_commands;
 
 bool scan_coords(char* coords, Pixel* p);

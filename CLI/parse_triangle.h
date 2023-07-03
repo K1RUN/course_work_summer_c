@@ -1,8 +1,10 @@
 #ifndef MY_PARSE_TRIANGLE_H
 #define MY_PARSE_TRIANGLE_H
-#include "command_parser.h"
 #include <stdbool.h>
+#include <getopt.h>
 #include <string.h>
+#include "helpmenu.h"
+#include "commands.h"
 #include "../Geometry/general.h"
 #include "../Geometry/triangle.h"
 #include "../Image/canvas.h"

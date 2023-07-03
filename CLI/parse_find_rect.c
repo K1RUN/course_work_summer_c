@@ -8,7 +8,6 @@ void parse_find_rect(int argc, char* argv[]) {
     int sum = 0;
     int opt;
     char* old_filename = NULL; char* new_filename = NULL;
-    print_args(argc, argv);
     opterr = 0;
     struct option longOpts[] = {
             {"max", required_argument, 0, 'm'},
@@ -46,6 +45,7 @@ void parse_find_rect(int argc, char* argv[]) {
                 new_filename = copy_string(optarg);
                 if(new_filename == NULL) {
                     fprintf(stderr, "Invalid option for a new file name\n");
+                    free(old_filename);
                     return;
                 }
                 findRect.new_filename = new_filename;
@@ -75,8 +75,6 @@ void parse_find_rect(int argc, char* argv[]) {
         free(old_filename);
         return;
     }
-    printf("\nNEW\n");
-    print_args(argc, argv);
     char* filename = findRect.old_filename;
     if(check_file(filename) == false) {
         free(new_filename);

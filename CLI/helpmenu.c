@@ -28,6 +28,13 @@ const char* helpmenu =  "██████  ███    ███ ████
                         "                -x, --x_num number         the number of the images by x-axis\n"
                         "                -y, --y_num number         the number of the images by y-axis\n"
                         "                -n, --new_file <file>.bmp  saves processed image to a new file (optional)\n"
+                        "\n"
+                        "            --fill_outer [options]\n"
+                        "                -x, --coords x,y           start coordinate\n"
+                        "                -w, --width number         width\n"
+                        "                -h, --height number        height\n"
+                        "                -c, --color color          set the fill color in RGB format (0,0,0; 255,255,255)\n"
+                        "                -n, --new_file <file>.bmp  saves processed image to a new file (optional)\n"
                         "\n";
 
 void print_help(){

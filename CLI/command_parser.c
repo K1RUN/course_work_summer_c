@@ -11,6 +11,7 @@ int parse_commands(int argc, char* argv[]) {
             {"triangle", no_argument, &command_flag, TRIANGLE},
             {"find_rect", no_argument, &command_flag, FIND_RECT},
             {"collage", no_argument, &command_flag, COLLAGE},
+            {"fill_outer", no_argument, &command_flag, FILL},
             {NULL, 0, NULL, 0}
     };
     int long_index;
@@ -48,11 +49,11 @@ int parse_commands(int argc, char* argv[]) {
                 parse_collage(argc, argv);
                 break;
             }
-            case UNKNOWN:
-            default: {
-                printf("????");
+            case FILL: {
+                parse_fill(argc, argv);
                 break;
             }
+            default: print_help();
         }
     }
     printf(ANSI_COLOR_RESET);
